@@ -299,7 +299,7 @@ h2 {
 }
 
 .logoImg {
-  background-image: url("/assets/image1.jpg");
+  background-image: url("./assets/image1.jpg");
   background-size: cover;
   background-position: 50% 100%;
 }

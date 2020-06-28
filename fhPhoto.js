@@ -4,17 +4,17 @@ console.log("hi, linked js file")
 const slides2 = [
 	slide1 = {
 		cat: `automotive`,
-		src: `url('/assets/image1.jpg')`,
+		src: `url('./assets/image1.jpg')`,
 		alt: "ford driving on logging road"
 	},
 	slide2 = {
 		cat: `automotive`,
-		src: `url('/assets/image2.jpg')`,
+		src: `url('./assets/image2.jpg')`,
 		alt: "subaru at ice cream stand with birds above on the wires"
 	},
 	slide3 = {
 		cat: `automotive`,
-		src: `url('/assets/image3.jpg')`,
+		src: `url('./assets/image3.jpg')`,
 		alt: "Toyota truck off road in deep snow"
 	},
 ];
