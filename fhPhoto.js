@@ -31,6 +31,10 @@ let arrowLeft = document.querySelector('#arrowLeft');
 let arrowRight = document.querySelector('#arrowRight');
 let logo = document.querySelector('.logoClip');
 console.log(sliderImages);
+let logoImages = document.querySelector('.logoImage')
+logoImages.style.backgroundImage = slides2[2].src;
+logoImages.style.backgroundSize = 'cover';
+logoImages.style.backgroundPosition = '50% 100%';
 
 // let selected = document.querySelector(".slide");
 let current = 0; //image counter

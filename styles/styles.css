@@ -295,11 +295,11 @@ h2 {
 .logoClip {
   -webkit-background-clip: text;
   background-clip: text;
+  color: black;
   color: transparent;
 }
 
 .logoImg {
-  background-image: url("./assets/image1.jpg");
   background-size: cover;
   background-position: 50% 100%;
 }
