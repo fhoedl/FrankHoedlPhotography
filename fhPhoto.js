@@ -1,16 +1,16 @@
-console.log("hi, linked js file")
+let fhPhotoApp = {};
 
-
-const slides2 = [
+// DATA
+fhPhotoApp.slides = [
 	slide1 = {
 		cat: `automotive`,
 		src: `url('./assets/image1.jpg')`,
-		alt: "ford driving on logging road"
+		alt: "Ford driving on logging road"
 	},
 	slide2 = {
 		cat: `automotive`,
 		src: `url('./assets/image2.jpg')`,
-		alt: "subaru at ice cream stand with birds above on the wires"
+		alt: "Subaru at ice cream stand with birds above on the wires"
 	},
 	slide3 = {
 		cat: `automotive`,
@@ -19,118 +19,149 @@ const slides2 = [
 	},
 ];
 
-// let fhPhotoApp = {}; //add namespacing
-// console.log(replace())
+// ARGUMENTS
+fhPhotoApp.current = 0; //image counter
+fhPhotoApp.category = `automotive` //temporary
 
-// let imageNum = 0;
-// Selectors...git status
+// SELECTORS
+fhPhotoApp.logo = document.querySelector('.logoClip');
+fhPhotoApp.sliderImages = document.querySelector('.slide');
+fhPhotoApp.arrowLeft = document.querySelector('#arrowLeft');
+fhPhotoApp.arrowRight = document.querySelector('#arrowRight');
 
-let sliderImages = document.querySelector('.slide');
-sliderImages.style.backgroundImage = slides2[0].src;
-let arrowLeft = document.querySelector('#arrowLeft');
-let arrowRight = document.querySelector('#arrowRight');
-let logo = document.querySelector('.logoClip');
-console.log(sliderImages);
-let logoImages = document.querySelector('.logoImage')
-logoImages.style.backgroundImage = slides2[2].src;
-logoImages.style.backgroundSize = 'cover';
-logoImages.style.backgroundPosition = '50% 100%';
-
-// let selected = document.querySelector(".slide");
-let current = 0; //image counter
-// let slide = `slide${currentSlide}`;
-let slide = slides2[current]
-
-// let slideAlt = sliderImages.setAttribute(slides2[0].key, slides2[0].src);
-// console.log(slides2[0].key, slides2[0].src);
-// console.log(slideAlt);
-// console.log(selected)
+// DESTRUCTURING Namespacing
+let{ current, category} = fhPhotoApp;
+const{ slides, logo , sliderImages, arrowLeft, arrowRight } = fhPhotoApp;
 
 
-
-// image(0);
-// Clears all images...
-// function reset(){
-//     for(let i=0; i<3; i++) {       
-// //         // image(i).style.display = " none";
-// //         // image(i).style.display = "none"       
-//         selected.style.display = "none";
-//     }
-// }
-
-
-// function startSlide(){
-//     reset(); 
-//     // image(0).style.display = "block"; 
-//     // selected.classList.add(slides[current]);
-//     selected.style.display = 'block';
-// }
+// INITIAL Assignment of Image Values
+// Thru Logo
+logo.style.cssText = 
+    `   background-image: ${slides[2].src}; 
+        background-size: cover;
+        background-position: 50% 100%;   
+    `;
+// Starting Slide - automotive
+    // sliderImages.style.backgroundImage = slides[0].src;
 
 
+/// EVENT LISTENERS
+// LOGO
+logo.addEventListener("click", () => {
+    console.log(`selected logo`);
+});
 
-// show Next Image
-function slideRight() {
-    // console.log(current)
-    // reset();
-    // let selected = document.querySelector(".slide");
-
-    current++;
-    // console.log(current)
-    sliderImages.style.backgroundImage = slides2[current].src;
-    sliderImages.style.alt = slides2[current].alt;
-    // slide = `slide${currentSlide}`;
-    // selected.classList.remove(slide);
-    // slide = `slide${currentSlide++}`;
-    // selected.classList.remove(slide);
-    // selected.classList.add(slides2[current]);
-    console.log(`slide number is:`,current);
-}
-
+// ARROWS, Navigating thru gallery
 arrowRight.addEventListener('click', () => {
-    console.log(`selected right`);
-    // 0 is first image
-    // console.log(current)
-    // if (current === 3 - 1 ) {
-    //     current =  - 1;  //total number of slides
-    slideRight();
-    // slideRight2();
-    // console.log(current)
+    fhPhotoApp.forward();    
+})
+arrowLeft.addEventListener('click', () => {
+    fhPhotoApp.back();
 })
 
-
-// //show Previous Image
-// function slideLeft(){
-//     reset();
-//     sliderImages.style.display = "none";
-//     // image(current - 1).style.display = "block";
-//     current --;
-// }
-
-// arrowLeft.addEventListener('click', () => {
-//     // 0 is first image
-//     // if (current === 0) {
-//     //     current = 3;  //total number of slides
-//     // }
-//     // slideLeft();
-//     console.log(`selected left`);
+// Alternate....
+// ARROWS & SPLIT SCREEN Combined, Navigating thru gallery
+// arrowRight.addEventListener = ('click', function(){
+//     window.removeEventListener(`mousedown`, addEventListener);
+//     fhPhotoApp.forward();    
 // })
-
-
-//eventListener on LOGO
-// logo.addEventListener('click', () => {
-//     console.log(`selected logo`);
+// arrowLeft.addEventListener = ('click', function() {
+//     window.removeEventListener(`mousedown`, addEventListener);
+//     fhPhotoApp.back();
 // })
+// window.addEventListener("mousedown", (e) => {
+// 	let width = document.documentElement.clientWidth;
+// 	let X = e.clientX;
+// 	(X <= width / 2) ? fhPhotoApp.back() : fhPhotoApp.forward();
+// });
 
 
-// 
-// startSlide();
+
+// FUNCTIONS
+// Clears all images...
+fhPhotoApp.reset = () => {
+    for(let i=0; i<slides.length; i++) {         
+        sliderImages.style.display = 'none';
+    }
+}
+
+// Base Image in the collection
+fhPhotoApp.startSlide = () => {
+    fhPhotoApp.reset();
+    sliderImages.style.display = 'block' 
+
+    // TERNARY PREPPED for Categories
+    // console.log(category);
+    // (category === `automotive`)
+    //     ? sliderImages.style.display = 'block' 
+    //     : sliderImages.style.display = 'none'; //temp
+}
 
 
+// Cycling Forward/Right thru the gallery
+fhPhotoApp.forward = () => {
+    if (current === slides.length - 1) {
+        current = -1; // NOTE: not subtracting but setting to -1
+    }
+    fhPhotoApp.slideRight();
+};
 
-/// ????
-// slideImages.innerHTML = `<img src="./assets/image${imageNum + 1}.jpg" alt="" srcset="">`;
-// let displayImg = sliderImages;
+fhPhotoApp.slideRight = () => {
+    current++;
+    fhPhotoApp.displayImage();
+};
+    /*  NOTE: based on count INCREASING...
+        ONCE WE GET TO LAST IMAGE( the condition)
+            sets "current" to -1, 
+        FUNCTION slideRight()... adds 1, 
+            so "current" value of -1 + 1 = 0
+        SINCE 0 is the first image, ... we loop to beginning.
+    */
+   
 
-// let image = (imageNum) =>{
-//     sliderImages.innerHTML += `<img src="./assets/image${imageNum + 1}.jpg" alt="" srcset="">`;
-// }
+// Cycling Back/Left thru the gallery
+fhPhotoApp.back = () => {
+    if (current === 0) {
+        current = slides.length;
+    }
+    fhPhotoApp.slideLeft(); 
+};
+
+fhPhotoApp.slideLeft = () => {
+    current--;
+    fhPhotoApp.displayImage();
+};
+    /*  NOTE: based on count DECREASING...
+        ONCE WE GET TO THE FIRST IMAGE (the condition)
+            sets "current" to length value (the number of images)
+        FUNCTION slideLeft()... subtracts 1,
+            "current" sets to last image, ... we loop to the end.
+    */
+
+
+// Display Image(forward or back)   
+fhPhotoApp.displayImage = () => {
+	sliderImages.style.cssText = `   background-image : ${slides[current].src};
+        `;
+	sliderImages.setAttribute(`alt`, slides[current].alt);
+};
+
+
+// Initialize
+fhPhotoApp.init = () =>{
+    // fhPhotoApp.reset();
+    // fhPhotoApp.startSlide();
+    fhPhotoApp.slideRight();
+    fhPhotoApp.slideLeft();
+}
+
+// Document Ready
+let ready = (callback) => {
+    if (document.readyState != "loading") callback();
+    else document.addEventListener("DOMContentLoaded", callback);
+}
+ready(() => {
+    console.log('Welcome to Frank Hoedl Photography, all images are copyright Frank Hoedl')
+    fhPhotoApp.init();
+});
+
