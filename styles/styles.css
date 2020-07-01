@@ -389,14 +389,14 @@ img {
 
 #arrowLeft {
   border-width: 15px 30px 15px 0;
-  border-color: transparent #fff transparent transparent;
+  border-color: transparent #2bc5f4 transparent transparent;
   left: 0;
   margin-left: 30px;
 }
 
 #arrowRight {
   border-width: 15px 0 15px 30px;
-  border-color: transparent transparent transparent #fff;
+  border-color: transparent transparent transparent #2bc5f4;
   right: 0;
   margin-right: 30px;
 }
