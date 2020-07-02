@@ -471,23 +471,23 @@ document.addEventListener('keydown', (e) => {
 		: null;
 })
 
-window.addEventListener("mousedown", (e) => {
-    let width = document.documentElement.clientWidth;
-    let X = e.clientX;
-    (X <= width / 2) ? fhPhotoApp.back() : fhPhotoApp.forward();
-});
-    // Arrows may be redundant depending on other elements
-    arrowRight.addEventListener = ('click',() => {
-        window.removeEventListener(`mousedown`, addEventListener);
-        fhPhotoApp.forward();    
-    })
-    arrowLeft.addEventListener = ('click', () => {
-        window.removeEventListener(`mousedown`, addEventListener);
-        fhPhotoApp.back();
-    })
+// window.addEventListener("mousedown", (e) => {
+//     let width = document.documentElement.clientWidth;
+//     let X = e.clientX;
+//     (X <= width / 2) ? fhPhotoApp.back() : fhPhotoApp.forward();
+// });
+//     // Arrows may be redundant depending on other elements
+//     arrowRight.addEventListener = ('click',() => {
+//         window.removeEventListener(`mousedown`, addEventListener);
+//         fhPhotoApp.forward();    
+//     })
+//     arrowLeft.addEventListener = ('click', () => {
+//         window.removeEventListener(`mousedown`, addEventListener);
+//         fhPhotoApp.back();
+//     })
         // ARROWS ONLY, Navigating thru gallery
-        // arrowRight.addEventListener('click', () => fhPhotoApp.forward());   
-        // arrowLeft.addEventListener('click', () => fhPhotoApp.back());
+        arrowRight.addEventListener('click', () => fhPhotoApp.forward());   
+        arrowLeft.addEventListener('click', () => fhPhotoApp.back());
 
 
 // FUNCTIONS
