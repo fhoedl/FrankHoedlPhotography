@@ -519,7 +519,7 @@ goToGallery.addEventListener('click', function(e){
 // GALLERY NAVIGATION Event
 // ARROWS & SPLIT SCREEN Combined, Navigating thru gallery
 document.addEventListener('keydown', (e) => {
-    console.log('key event:', e.code)
+    // console.log('key event:', e.code)
     e.code === `ArrowLeft`
 		? fhPhotoApp.back()
 		: e.code === `ArrowRight`
@@ -527,23 +527,29 @@ document.addEventListener('keydown', (e) => {
 		: null;
 })
 
-// window.addEventListener("mousedown", (e) => {
-//     // width = document.documentElement.clientWidth;
-//     let X = e.clientX;
-//     (X <= width / 2) ? fhPhotoApp.back() : fhPhotoApp.forward();
-// });
+window.addEventListener("mousedown", (e) => {
+    // width = document.documentElement.clientWidth;
+	let xPosition = e.clientX;
+	let currentElement = e.target;
+	// console.log(currentElement)
+	if (currentElement.classList.contains('.slideContent') !== true){
+		xPosition <= width / 2 ? fhPhotoApp.back() : fhPhotoApp.forward();	
+	} else{
+		null
+	}
+});
 //     // Arrows may be redundant depending on other elements
-//     arrowRight.addEventListener = ('click',() => {
-//         window.removeEventListener(`mousedown`, addEventListener);
-//         fhPhotoApp.forward();    
-//     })
-//     arrowLeft.addEventListener = ('click', () => {
-//         window.removeEventListener(`mousedown`, addEventListener);
-//         fhPhotoApp.back();
-//     })
-        // ARROWS ONLY, Navigating thru gallery
-        arrowRight.addEventListener('click', () => fhPhotoApp.forward());   
-        arrowLeft.addEventListener('click', () => fhPhotoApp.back());
+    arrowRight.addEventListener=('click',() => {
+		fhPhotoApp.forward();  
+		//remove only necessary if event is uncommented 
+        window.removeEventListener(`mousedown`, addEventListener);
+    });
+    arrowLeft.addEventListener=('click', () => {
+		fhPhotoApp.back();
+		//remove only necessary if event is uncommented
+        window.removeEventListener(`mousedown`, addEventListener);
+    });
+
 
 
 // FUNCTIONS
@@ -608,16 +614,6 @@ fhPhotoApp.slideLeft = () => {
 fhPhotoApp.displayImage = function () {
     sliderImages.style.cssText = `   background-image : ${slidesByCategory[current].src}; `;
     sliderImages.setAttribute(`alt`, slidesByCategory[current].alt);
-	// console.log(`current: `, current);
-	// console.log(`length is `, length);
-	// fhPhotoApp.preloadImages();
-
-	// sliderNext.style.cssText = ` background-image : ${
-	// 	slidesByCategory[current + 1].src
-	// 	}; `;
-	// sliderPrevious.style.cssText = ` background-image : ${
-	// 	slidesByCategory[current - 1].src
-	// 	}; `;
 };
 
 fhPhotoApp.preloadImages = function () {
