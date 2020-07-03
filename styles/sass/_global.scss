@@ -21,6 +21,7 @@ body{
     //fix for iphone menubar
     padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     font-family: $primaryFont;
+    
 }
 
 body, 
@@ -42,12 +43,13 @@ header {
     display: flex;
 }
 h2 {
-    font-size: 20rem;
+    font-size: calc( 15rem + 6vw);
     font-weight: 700; 
     line-height: 1.6;
     text-transform: uppercase; 
     margin: auto;       // element centered
-    padding-bottom: 2%; // compensate for visual(vertical) center  
+    padding-bottom: 2%; // compensate for visual(vertical) center 
+    // object-fit: cover;
 }
 
 // Clipping within text 

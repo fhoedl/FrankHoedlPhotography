@@ -285,7 +285,7 @@ header {
 }
 
 h2 {
-  font-size: 20rem;
+  font-size: calc( 15rem + 6vw);
   font-weight: 700;
   line-height: 1.6;
   text-transform: uppercase;
