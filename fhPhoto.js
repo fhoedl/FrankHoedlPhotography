@@ -544,20 +544,21 @@ document.addEventListener('keydown', (e) => {
 		: null;
 })
 
-window.addEventListener("mousedown", (e) => {
-	if(window.mobileAndTabletCheck()===false){
-		let xPosition = e.clientX;
-		let currentElement = e.target;
-		if (currentElement.classList.contains('.slideContent') !== true){
-			xPosition <= width / 2 ? fhPhotoApp.back() : fhPhotoApp.forward();	
-		} else{
-			null
-		}
-	}
-	else{
-		null;
-	}
-});
+// NAVIGATION by clicking the right or left sides of the screen
+// window.addEventListener("mousedown", (e) => {
+// 	if(window.mobileAndTabletCheck()===false){
+// 		let xPosition = e.clientX;
+// 		let currentElement = e.target;
+// 		if (currentElement.classList.contains('.slideContent') !== true){
+// 			xPosition <= width / 2 ? fhPhotoApp.back() : fhPhotoApp.forward();	
+// 		} else{
+// 			null
+// 		}
+// 	}
+// 	else{
+// 		null;
+// 	}
+// });
 //     // Arrows may be redundant depending on other elements
 
     // arrowRight.addEventListener=('click',() => {
@@ -571,18 +572,18 @@ window.addEventListener("mousedown", (e) => {
     //     window.removeEventListener(`mousedown`, addEventListener);
     // });
 
-	arrowRight.addEventListener = ('click',() => {
+	arrowRight.addEventListener('click',() => {
 		fhPhotoApp.forward(); 
-		if(window.mobileAndTabletCheck()===false){ 
-			window.removeEventListener(`mousedown`, addEventListener);
-			console.log('on desktop')
-		}
+		// if(window.mobileAndTabletCheck()===false){ 
+		// 	window.removeEventListener(`mousedown`, addEventListener);
+		// 	console.log('on desktop')
+		// }
     });
-    arrowLeft.addEventListener = ('click', () => {
+    arrowLeft.addEventListener('click', () => {
 		fhPhotoApp.back();
-		if(window.mobileAndTabletCheck()===false){ 
-			window.removeEventListener(`mousedown`, addEventListener);
-		}
+		// if(window.mobileAndTabletCheck()===false){ 
+		// 	window.removeEventListener(`mousedown`, addEventListener);
+		// }
     });
 
 
