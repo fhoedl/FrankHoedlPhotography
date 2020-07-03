@@ -365,17 +365,30 @@ li a {
   position: relative;
 }
 
+.slider {
+  position: relative;
+}
+
 .slide {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  opacity: 1;
 }
 
-img {
-  width: 100%;
+.nextSlide,
+.previousSlide {
+  position: absolute;
+  opacity: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   height: 100vh;
-  -o-object-fit: cover;
-     object-fit: cover;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
 
 .arrow {
