@@ -467,6 +467,7 @@ fhPhotoApp.arrowLeft = document.querySelector('#arrowLeft');
 fhPhotoApp.arrowRight = document.querySelector('#arrowRight');
 fhPhotoApp.goToGallery = document.querySelector('.portfolioContainer');
 fhPhotoApp.goToPortfolio = document.querySelector(`#slider`);
+fhPhotoApp.width = document.documentElement.clientWidth;
 
 
 // NameSpacing Destructured.
@@ -476,7 +477,8 @@ let{
     slides, 
 	slidesByCategory,
 	logoImages,
-    length 
+	length,
+	width 
 } = fhPhotoApp;
 
 const{
@@ -490,10 +492,10 @@ const{
 	goToPortfolio,
 } = fhPhotoApp;
 
+
+
 // INITIAL Assignment of Image Values
 // Thru Logo
-
-
 logo.style.cssText = `  background-image: ${logoImages[0].src}; 
                         background-size: cover;
 						background-position: 70% 100%; 
@@ -526,7 +528,7 @@ document.addEventListener('keydown', (e) => {
 })
 
 // window.addEventListener("mousedown", (e) => {
-//     let width = document.documentElement.clientWidth;
+//     // width = document.documentElement.clientWidth;
 //     let X = e.clientX;
 //     (X <= width / 2) ? fhPhotoApp.back() : fhPhotoApp.forward();
 // });
@@ -619,12 +621,27 @@ fhPhotoApp.displayImage = function () {
 };
 
 fhPhotoApp.preloadImages = function () {
-	sliderNext.style.cssText = ` background-image : ${
-		slidesByCategory[current + 1].src
+	// preload next image
+	if (slidesByCategory[current + 1] === undefined) {
+		sliderNext.style.cssText = ` background-image : ${
+			slidesByCategory[current].src
 		}; `;
-	sliderPrevious.style.cssText = ` background-image : ${
-		slidesByCategory[current - 1].src
+	} else {
+		sliderNext.style.cssText = ` background-image : ${
+			slidesByCategory[current + 1].src
 		}; `;
+	}
+
+	//Preload Previous
+	if (slidesByCategory[current - 1] === undefined) {
+		sliderPrevious.style.cssText = ` background-image : ${
+			slidesByCategory[length - 1].src
+			}; `;
+	} else {
+		sliderPrevious.style.cssText = ` background-image : ${
+			slidesByCategory[current - 1].src
+		}; `;
+	}
 }
 
 

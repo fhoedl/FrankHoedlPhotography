@@ -77,9 +77,6 @@ nav>ul{
     flex-direction: row;
     flex-wrap: wrap;
     margin: auto;
-    // width:680px;
-    // display: grid;
-    // grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
 }
 
 .siteNavContainer{
@@ -92,7 +89,6 @@ nav>ul{
     flex-grow: 1;
     display: flex; // to enable centering type
     transform: all;
-    // width:170px;
 }
 
 .siteNavButton:hover,
