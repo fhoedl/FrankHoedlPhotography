@@ -486,6 +486,7 @@ window.mobileAndTabletCheck = function () {
 	return check;
 };
 
+
 // NameSpacing Destructured.
 let{
     current, 
@@ -558,17 +559,31 @@ window.addEventListener("mousedown", (e) => {
 	}
 });
 //     // Arrows may be redundant depending on other elements
-    arrowRight.addEventListener=('click',() => {
-		fhPhotoApp.forward();  
-		//remove only necessary if event is uncommented 
-        window.removeEventListener(`mousedown`, addEventListener);
-    });
-    arrowLeft.addEventListener=('click', () => {
-		fhPhotoApp.back();
-		//remove only necessary if event is uncommented
-        window.removeEventListener(`mousedown`, addEventListener);
-    });
 
+    // arrowRight.addEventListener=('click',() => {
+	// 	fhPhotoApp.forward();  
+	// 	//remove only necessary if event is uncommented 
+    //     window.removeEventListener(`mousedown`, addEventListener);
+    // });
+    // arrowLeft.addEventListener=('click', () => {
+	// 	fhPhotoApp.back();
+	// 	//remove only necessary if event is uncommented
+    //     window.removeEventListener(`mousedown`, addEventListener);
+    // });
+
+	arrowRight.addEventListener = ('click',() => {
+		fhPhotoApp.forward(); 
+		if(window.mobileAndTabletCheck()===false){ 
+			window.removeEventListener(`mousedown`, addEventListener);
+			console.log('on desktop')
+		}
+    });
+    arrowLeft.addEventListener = ('click', () => {
+		fhPhotoApp.back();
+		if(window.mobileAndTabletCheck()===false){ 
+			window.removeEventListener(`mousedown`, addEventListener);
+		}
+    });
 
 
 // FUNCTIONS
