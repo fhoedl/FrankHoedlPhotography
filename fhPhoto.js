@@ -465,9 +465,12 @@ fhPhotoApp.sliderPrevious = document.querySelector(".previousSlide");
 fhPhotoApp.sliderNext = document.querySelector(".nextSlide");
 fhPhotoApp.arrowLeft = document.querySelector('#arrowLeft');
 fhPhotoApp.arrowRight = document.querySelector('#arrowRight');
-fhPhotoApp.goToGallery = document.querySelector('.portfolioContainer');
+fhPhotoApp.goToGallery = document.querySelector('#fullPageNav');
 fhPhotoApp.goToPortfolio = document.querySelector(`#slider`);
 fhPhotoApp.width = document.documentElement.clientWidth;
+fhPhotoApp.isChecked =document.querySelector('input')
+fhPhotoApp.isCheckedAlso = document.querySelector('.menuBox')
+fhPhotoApp.menuOverlay = document.querySelector('.menuItems')
 
 
 window.mobileAndTabletCheck = function () {
@@ -495,6 +498,7 @@ let{
 	slidesByCategory,
 	logoImages,
 	length,
+	isChecked,
 	width 
 } = fhPhotoApp;
 
@@ -507,6 +511,8 @@ const{
 	arrowRight,
 	goToGallery,
 	goToPortfolio,
+	menuOverlay,
+	isCheckedAlso,
 } = fhPhotoApp;
 
 
@@ -521,20 +527,37 @@ logo.style.cssText = `  background-image: ${logoImages[0].src};
 
 // EVENT LISTENERS
 // LOGO Event
-logo.addEventListener("click", () => {
-    console.log(`selected logo`);
+// logo.addEventListener("click", () => {
+// 	console.log(`selected logo`);
+// 	goToGallery.scrollIntoView();
+// 	// console.log(goYoGallery)	
+// });
+
+isChecked.addEventListener('click', function(){
+	if(isChecked.checked === true ||
+		isCheckedAlso.checked === true){
+		console.log('checked')
+		menuOverlay.classList.add('toggle');		
+	} else {
+		console.log('unchecked')
+		menuOverlay.classList.remove('toggle');
+	}
 });
+
+
+
 
 // PORTFOLIOS SELECTED Event
 goToGallery.addEventListener('click', function(e){
+	console.log(goToGallery.getBoundingClientRect());
 	category = e.target.childNodes[1].className; 
 	// category = e.target.childNodes[1].className; 
     console.log(`category is: `,category);
     fhPhotoApp.setCategory();
 })
 
-// GALLERY NAVIGATION Event
-// ARROWS & SPLIT SCREEN Combined, Navigating thru gallery
+// GALLERY NAVIGATION
+// Using ARROWS
 document.addEventListener('keydown', (e) => {
     // console.log('key event:', e.code)
     e.code === `ArrowLeft`
@@ -544,14 +567,14 @@ document.addEventListener('keydown', (e) => {
 		: null;
 })
 
+// using ARROW ICONS
+//(DESKTOP Only) Using LEFT & RIGHT Half of Image 
 fhPhotoApp.ifMobile = function (){
 	if (window.mobileAndTabletCheck() === false) {
 		window.addEventListener("mousedown", (e) => {
 			let xPosition = e.clientX;
-			console.log(e.target);
 			if (e.target.classList.contains("slideContent") === true 
 				|| e.target.classList.contains("arrow")=== true) {
-				console.log('true')
 				xPosition <= width / 2
 					? fhPhotoApp.back()
 					: fhPhotoApp.forward();
@@ -570,8 +593,7 @@ fhPhotoApp.ifMobile = function (){
 			}
 		});
 	} 
-	else {
-		
+	else {		
 		arrowRight.addEventListener('click',() => {
 			fhPhotoApp.forward(); 
 		});
@@ -580,22 +602,6 @@ fhPhotoApp.ifMobile = function (){
 		});
 	};
 }
-
-
-	// arrowRight.addEventListener('click',() => {
-	// 	fhPhotoApp.forward(); 
-	// 	// if(window.mobileAndTabletCheck()===false){ 
-	// 	// 	window.removeEventListener(`mousedown`, addEventListener);
-	// 	// 	console.log('on desktop')
-	// 	// }
-    // });
-    // arrowLeft.addEventListener('click', () => {
-	// 	fhPhotoApp.back();
-	// 	// if(window.mobileAndTabletCheck()===false){ 
-	// 	// 	window.removeEventListener(`mousedown`, addEventListener);
-	// 	// }
-    // });
-
 
 // FUNCTIONS
 // Clears all images...
@@ -688,6 +694,7 @@ fhPhotoApp.preloadImages = function () {
 
 // Initialize
 fhPhotoApp.init = () =>{
+	// fhPhotoApp.activateMenu();
 	fhPhotoApp.ifMobile(); 
     fhPhotoApp.slideRight();
     fhPhotoApp.slideLeft();

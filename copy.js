@@ -637,4 +637,12 @@ ready(() => {
 
 // ARCHIVE
 
-
+isChecked.addEventListener('click', function () {
+	if (isChecked.checked === true) {
+		console.log('checked')
+		menuOverlay.classList.add('toggle');
+	} else {
+		console.log('unchecked')
+		menuOverlay.classList.remove('toggle');
+	}
+});

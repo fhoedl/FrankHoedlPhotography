@@ -270,6 +270,7 @@ body {
 body,
 #slider,
 header,
+nav,
 .wrapper,
 .slideContent {
   font-family: "neue-haas-grotesk-display", sans-serif;
@@ -278,19 +279,42 @@ header,
   overflow-x: hidden;
 }
 
+#fullPageNav {
+  position: relative;
+  height: 100vh;
+}
+
 header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
+header div {
+  margin: auto;
+  position: relative;
+}
+
+header a,
 h2 {
   font-size: calc( 15rem + 6vw);
   font-weight: 700;
   line-height: 1.6;
   text-transform: uppercase;
-  margin: auto;
   padding-bottom: 2%;
+}
+
+header a {
+  color: black;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }
 
 .logoClip {
@@ -302,10 +326,6 @@ h2 {
 
 .logoClip:hover {
   font-size: 30rem;
-}
-
-nav > ul {
-  height: 100vh;
 }
 
 .siteNavContainer,
@@ -398,20 +418,120 @@ li a {
   width: 0;
   height: 0;
   border-style: solid;
+  z-index: 5;
 }
 
 #arrowLeft {
   border-width: 15px 30px 15px 0;
   border-color: transparent #2bc5f4 transparent transparent;
   left: 0;
-  margin-left: 30px;
+  margin-left: 40px;
 }
 
 #arrowRight {
   border-width: 15px 0 15px 30px;
   border-color: transparent transparent transparent #2bc5f4;
   right: 0;
-  margin-right: 30px;
+  margin-right: 40px;
+}
+
+input {
+  position: absolute;
+  left: 0;
+  display: none;
+}
+
+.menu,
+.menuBox {
+  position: absolute;
+  z-index: 10;
+  top: 50px;
+  left: 40px;
+  width: 50px;
+  height: 42px;
+  pointer-events: inherit;
+}
+
+.menuBox {
+  top: 0px;
+  left: 0px;
+  background-color: none;
+}
+
+.menu:hover ~ .menuItems,
+.menu:focus-within ~ .menuItems {
+  visibility: visible;
+}
+
+.hamburgerMenu:hover ~ .menuItems,
+.hamburgerMenu:focus-within ~ .menuItems {
+  visibility: visible;
+}
+
+.toggle {
+  visibility: visible;
+}
+
+.menuItems {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(72, 72, 72, 0.9);
+  z-index: 8;
+  display: -ms-grid;
+  display: grid;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  visibility: hidden;
+  margin: auto;
+  padding-bottom: 2.5%;
+}
+
+.toggle {
+  visibility: visible;
+}
+
+.menuItems li {
+  z-index: 10;
+  font-family: "neue-haas-grotesk-display", sans-serif;
+  font-weight: 400;
+  font-size: 3rem;
+  letter-spacing: .2rem;
+  text-transform: uppercase;
+  text-align: center;
+  margin: auto;
+}
+
+.menuItems li a {
+  z-index: 10;
+  color: #fff;
+}
+
+.hamburgerMenu,
+.hamburgerMenu::before,
+.hamburgerMenu::after {
+  margin-top: 18px;
+  position: relative;
+  width: 50px;
+  height: 6px;
+  background-color: #bf670a;
+  z-index: 10;
+}
+
+.hamburgerMenu::before {
+  content: '';
+  position: absolute;
+  margin-top: 0;
+  top: -18px;
+}
+
+.hamburgerMenu::after {
+  content: '';
+  position: absolute;
+  margin-top: 0;
+  bottom: -18px;
 }
 
 @media (max-width: 540px) {

@@ -11,14 +11,17 @@
     
     <header>
         <!-- <h1>Frank Hoedl Photography</h1> -->
-        <h2 class="logoClip">FH</h2>
+        <div>
+            <h2 class="logoClip">FH</h2>
+            <a href="#fullPageNav">FH</a>
+        </div>
         <!-- <h2 class="logoClip logoImg">FH</h2> -->
         <!-- <img src="./assets/image1.jpg" alt="" srcset="" id="slideImg"> -->
         <!-- navigation -->
     </header>
 
-    <nav class="menuMain menuOverlay">
-        <ul class="subMenu">
+    <div id="fullPageNav">
+    <nav>
             <!-- <label for="navToggleCheck" class="navToggle" 
                 role="navigation" aria-labelledby="Click to open dropdown menu" 
                 aria-haspopup="true" tabindex="0" >
@@ -71,13 +74,28 @@
                     </a>
                 </li>    
             </ul>            
-        </ul>
-
     </nav>
+    </div>
     <main class="galleryContainer">
         <div class="wrap">
             <!-- <div id="arrowLeft" class="arrow"></div> -->
             <div id="slider">
+                <div class="menuOverlay">
+                <div class="menu">
+                    <input type="checkbox" name="menuToggle" id="navToggle" >
+                    <label for="navToggle" class="toggle" role="navigation"> 
+                        <div class="menuBox"></div>
+                        <div class="hamburgerMenu">
+                        </div>
+                    </label>
+                </div>
+                    <ul class="menuItems">
+                        <li><a href="#fullPageNav">Portfolios</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>    
+                </div>
+                <div id="arrowLeft" class="arrow"></div>
                 <div class="slide slideContent"></div>
             <!-- <div class = "addId"> -->
                 <div class="nextSlide sliderContent"></div>
@@ -95,12 +113,12 @@
                 <!-- <img src="./assets/image3.jpg" alt="" srcset="" id="slideImg"> -->
                 <!-- </div>
                     </div> -->
-            
+            <!-- <div id="arrowLeft" class="arrow"></div> -->
+            <div id="arrowRight" class="arrow"></div>  
+            <!-- <a href="#fullPageNav" class="categoryLink">Portfolios  
+            </a> -->
             </div>
-            <div id="arrowLeft" class="arrow"></div>
-            <div id="arrowRight" class="arrow"></div>
-        </div>
-        
+        </div>   
     </main>
     
     <script src="./fhPhoto.js"></script>
