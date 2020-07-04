@@ -544,47 +544,57 @@ document.addEventListener('keydown', (e) => {
 		: null;
 })
 
-// NAVIGATION by clicking the right or left sides of the screen
-// window.addEventListener("mousedown", (e) => {
-// 	if(window.mobileAndTabletCheck()===false){
-// 		let xPosition = e.clientX;
-// 		let currentElement = e.target;
-// 		if (currentElement.classList.contains('.slideContent') !== true){
-// 			xPosition <= width / 2 ? fhPhotoApp.back() : fhPhotoApp.forward();	
-// 		} else{
-// 			null
-// 		}
-// 	}
-// 	else{
-// 		null;
-// 	}
-// });
-//     // Arrows may be redundant depending on other elements
+fhPhotoApp.ifMobile = function (){
+	if (window.mobileAndTabletCheck() === false) {
+		window.addEventListener("mousedown", (e) => {
+			let xPosition = e.clientX;
+			console.log(e.target);
+			if (e.target.classList.contains("slideContent") === true 
+				|| e.target.classList.contains("arrow")=== true) {
+				console.log('true')
+				xPosition <= width / 2
+					? fhPhotoApp.back()
+					: fhPhotoApp.forward();
 
-    // arrowRight.addEventListener=('click',() => {
-	// 	fhPhotoApp.forward();  
-	// 	//remove only necessary if event is uncommented 
-    //     window.removeEventListener(`mousedown`, addEventListener);
+				arrowRight.addEventListener = ('click',() => {
+					fhPhotoApp.forward();  
+					window.removeEventListener(`mousedown`, addEventListener);
+				});
+				
+				arrowLeft.addEventListener = ('click', () => {
+					fhPhotoApp.back();
+					window.removeEventListener(`mousedown`, addEventListener);
+				});		
+			} else {
+				null;
+			}
+		});
+	} 
+	else {
+		
+		arrowRight.addEventListener('click',() => {
+			fhPhotoApp.forward(); 
+		});
+		arrowLeft.addEventListener('click', () => {
+			fhPhotoApp.back();
+		});
+	};
+}
+
+
+	// arrowRight.addEventListener('click',() => {
+	// 	fhPhotoApp.forward(); 
+	// 	// if(window.mobileAndTabletCheck()===false){ 
+	// 	// 	window.removeEventListener(`mousedown`, addEventListener);
+	// 	// 	console.log('on desktop')
+	// 	// }
     // });
-    // arrowLeft.addEventListener=('click', () => {
+    // arrowLeft.addEventListener('click', () => {
 	// 	fhPhotoApp.back();
-	// 	//remove only necessary if event is uncommented
-    //     window.removeEventListener(`mousedown`, addEventListener);
+	// 	// if(window.mobileAndTabletCheck()===false){ 
+	// 	// 	window.removeEventListener(`mousedown`, addEventListener);
+	// 	// }
     // });
-
-	arrowRight.addEventListener('click',() => {
-		fhPhotoApp.forward(); 
-		// if(window.mobileAndTabletCheck()===false){ 
-		// 	window.removeEventListener(`mousedown`, addEventListener);
-		// 	console.log('on desktop')
-		// }
-    });
-    arrowLeft.addEventListener('click', () => {
-		fhPhotoApp.back();
-		// if(window.mobileAndTabletCheck()===false){ 
-		// 	window.removeEventListener(`mousedown`, addEventListener);
-		// }
-    });
 
 
 // FUNCTIONS
@@ -678,6 +688,7 @@ fhPhotoApp.preloadImages = function () {
 
 // Initialize
 fhPhotoApp.init = () =>{
+	fhPhotoApp.ifMobile(); 
     fhPhotoApp.slideRight();
     fhPhotoApp.slideLeft();
 }
