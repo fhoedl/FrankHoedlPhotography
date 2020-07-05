@@ -435,51 +435,69 @@ li a {
   margin-right: 40px;
 }
 
-input {
-  position: absolute;
-  left: 0;
-  display: none;
-}
-
 .menu,
+input,
 .menuBox {
   position: absolute;
   z-index: 10;
-  top: 50px;
+}
+
+input,
+.menuBox {
+  top: 40px;
   left: 40px;
-  width: 50px;
   height: 42px;
   pointer-events: inherit;
 }
 
-.menuBox {
-  top: 0px;
-  left: 0px;
-  background-color: none;
+input {
+  opacity: 0;
 }
 
-.menu:hover ~ .menuItems,
-.menu:focus-within ~ .menuItems {
-  visibility: visible;
+.hamburgerMenu,
+.hamburgerMenu::before,
+.hamburgerMenu::after {
+  margin-top: 18px;
+  position: relative;
+  width: 40px;
+  height: 4px;
+  background-color: #bf670a;
+  z-index: 10;
 }
 
-.hamburgerMenu:hover ~ .menuItems,
-.hamburgerMenu:focus-within ~ .menuItems {
-  visibility: visible;
+.hamburgerMenu::before {
+  content: '';
+  position: absolute;
+  margin-top: 0;
+  top: -15px;
 }
 
-.toggle {
-  visibility: visible;
+.hamburgerMenu::after {
+  content: '';
+  position: absolute;
+  margin-top: 0;
+  bottom: -15px;
+}
+
+.menu:hover .hamburgerMenu,
+.menu:focus-within .hamburgerMenu {
+  background-color: white;
+}
+
+.menu:hover .hamburgerMenu::before, .menu:hover .hamburgerMenu::after,
+.menu:focus-within .hamburgerMenu::before,
+.menu:focus-within .hamburgerMenu::after {
+  background-color: white;
 }
 
 .menuItems {
   position: absolute;
+  z-index: 8;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
   background-color: rgba(72, 72, 72, 0.9);
-  z-index: 8;
   display: -ms-grid;
   display: grid;
   -ms-flex-line-pack: center;
@@ -487,10 +505,6 @@ input {
   visibility: hidden;
   margin: auto;
   padding-bottom: 2.5%;
-}
-
-.toggle {
-  visibility: visible;
 }
 
 .menuItems li {
@@ -505,33 +519,11 @@ input {
 }
 
 .menuItems li a {
-  z-index: 10;
   color: #fff;
 }
 
-.hamburgerMenu,
-.hamburgerMenu::before,
-.hamburgerMenu::after {
-  margin-top: 18px;
-  position: relative;
-  width: 50px;
-  height: 6px;
-  background-color: #bf670a;
-  z-index: 10;
-}
-
-.hamburgerMenu::before {
-  content: '';
-  position: absolute;
-  margin-top: 0;
-  top: -18px;
-}
-
-.hamburgerMenu::after {
-  content: '';
-  position: absolute;
-  margin-top: 0;
-  bottom: -18px;
+.toggle {
+  visibility: visible;
 }
 
 @media (max-width: 540px) {

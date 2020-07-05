@@ -7,29 +7,17 @@
     <link rel="stylesheet" href="./styles/styles.css">
     <title>Frank Hoedl Photography</title>
 </head>
-<body>
-    
+<body>   
     <header>
         <!-- <h1>Frank Hoedl Photography</h1> -->
         <div>
             <h2 class="logoClip">FH</h2>
             <a href="#fullPageNav">FH</a>
         </div>
-        <!-- <h2 class="logoClip logoImg">FH</h2> -->
-        <!-- <img src="./assets/image1.jpg" alt="" srcset="" id="slideImg"> -->
-        <!-- navigation -->
     </header>
 
     <div id="fullPageNav">
     <nav>
-            <!-- <label for="navToggleCheck" class="navToggle" 
-                role="navigation" aria-labelledby="Click to open dropdown menu" 
-                aria-haspopup="true" tabindex="0" >
-                <span class="hamburger"></span> 
-            </label>
-            <input  type="checkbox" name="menuCheckbox" 
-                    id="navToggleCheck" class="navToggle" > -->
-
             <ul class="portfolioContainer">
                 <li class="menuButton portfolio port1 lifestyle">
                     <a href="#lifestyle" class="lifestyle" title="Got to Automotive Portfolio" >
@@ -78,45 +66,34 @@
     </div>
     <main class="galleryContainer">
         <div class="wrap">
-            <!-- <div id="arrowLeft" class="arrow"></div> -->
             <div id="slider">
-                <div class="menuOverlay">
                 <div class="menu">
-                    <input type="checkbox" name="menuToggle" id="navToggle" >
-                    <label for="navToggle" class="toggle" role="navigation"> 
-                        <div class="menuBox"></div>
-                        <div class="hamburgerMenu">
+                    <!-- Hidden Checkbox -->
+                    <input  type="checkbox" 
+                            id="navToggle"           
+                            name="menuToggle" 
+                    >
+                    <!-- Hamburger Menu-->
+                    <label for="navToggle" class="toggle" > 
+                        <div class="menuBox">
+                            <div class="hamburgerMenu"></div>
                         </div>
                     </label>
                 </div>
-                    <ul class="menuItems">
-                        <li><a href="#fullPageNav">Portfolios</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>    
-                </div>
+                <!-- Overlay Menu Options -->
+                <ul class="menuItems">
+                    <li><a href="#fullPageNav">Portfolios</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>  
+                <!-- Arrow Navigation  -->
                 <div id="arrowLeft" class="arrow"></div>
+                <div id="arrowRight" class="arrow"></div>
+                <!-- Images -->
                 <div class="slide slideContent"></div>
-            <!-- <div class = "addId"> -->
+                <!-- Preloading for smoother transitions / Hidden -->
                 <div class="nextSlide sliderContent"></div>
-                <div class="previousSlide slideContent"></div>
-
-                <!-- <div class="slide slide2">
-                        <div class="slideContent"> -->
-                <!-- <span>Image Two</span> -->
-                <!-- <img src="./assets/image2.jpg" alt="" srcset="" id="slideImg"> -->
-                <!-- </div>
-                    </div> -->
-                <!-- <div class="slide slide3">
-                        <div class="slideContent"> -->
-                <!-- <span>Image Three</span> -->
-                <!-- <img src="./assets/image3.jpg" alt="" srcset="" id="slideImg"> -->
-                <!-- </div>
-                    </div> -->
-            <!-- <div id="arrowLeft" class="arrow"></div> -->
-            <div id="arrowRight" class="arrow"></div>  
-            <!-- <a href="#fullPageNav" class="categoryLink">Portfolios  
-            </a> -->
+                <div class="previousSlide slideContent"></div> 
             </div>
         </div>   
     </main>
