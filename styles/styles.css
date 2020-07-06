@@ -534,3 +534,21 @@ input {
     background-color: #dedede;
   }
 }
+
+.animatedNav::after {
+  -webkit-transform: rotate(-270deg) translate(-14px);
+          transform: rotate(-270deg) translate(-14px);
+  -webkit-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+}
+
+.animatedNav {
+  -webkit-transform: rotate(-225deg);
+          transform: rotate(-225deg);
+  -webkit-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+}
+
+.animatedNav::before {
+  visibility: hidden;
+}

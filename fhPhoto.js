@@ -471,6 +471,7 @@ fhPhotoApp.width = document.documentElement.clientWidth;
 fhPhotoApp.isChecked =document.querySelector('input')
 // fhPhotoApp.isCheckedAlso = document.querySelector('.menuBox')
 fhPhotoApp.menuOverlay = document.querySelector('.menuItems')
+fhPhotoApp.hamburger = document.querySelector('.hamburgerMenu')
 
 
 
@@ -513,6 +514,7 @@ const{
 	goToPortfolio,
 	menuOverlay,
 	isCheckedAlso,
+	hamburger,
 } = fhPhotoApp;
 
 
@@ -583,15 +585,21 @@ fhPhotoApp.ifNotMobile = function (){
 
 
 // Display Gallery Menu Overlay
+// Animate hamburger to x
 isChecked.addEventListener('click', function () {
-	isChecked.checked === true ?
-		menuOverlay.classList.add('toggle')
-		: menuOverlay.classList.remove('toggle');
+	if(isChecked.checked === true){
+		menuOverlay.classList.add('toggle');
+		hamburger.classList.add('animatedNav');
+	}else{
+		menuOverlay.classList.remove('toggle');
+		hamburger.classList.remove('animatedNav');
+	}
 });
 
 // Hide Gallery Menu Overlay, if user clicks on overlay vs option
 menuOverlay.addEventListener('click', () => {
 	menuOverlay.classList.remove('toggle');
+	hamburger.classList.remove('animatedNav');
 });
 
 
@@ -615,6 +623,7 @@ fhPhotoApp.setCategory = function() {
 	current = 0; // Reset the Gallery to the First Image[0]
 	fhPhotoApp.displayImage();
 	menuOverlay.classList.remove('toggle');
+	hamburger.classList.remove('animatedNav');
 	goToPortfolio.scrollIntoView();
 	fhPhotoApp.preloadImages();
 };
