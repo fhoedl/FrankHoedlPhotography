@@ -469,8 +469,9 @@ fhPhotoApp.goToGallery = document.querySelector('#fullPageNav');
 fhPhotoApp.goToPortfolio = document.querySelector(`#slider`);
 fhPhotoApp.width = document.documentElement.clientWidth;
 fhPhotoApp.isChecked =document.querySelector('input')
-fhPhotoApp.isCheckedAlso = document.querySelector('.menuBox')
+// fhPhotoApp.isCheckedAlso = document.querySelector('.menuBox')
 fhPhotoApp.menuOverlay = document.querySelector('.menuItems')
+
 
 
 window.mobileAndTabletCheck = function () {
@@ -488,7 +489,6 @@ window.mobileAndTabletCheck = function () {
 	})(navigator.userAgent || navigator.vendor || window.opera);
 	return check;
 };
-
 
 // NameSpacing Destructured.
 let{
@@ -516,7 +516,6 @@ const{
 } = fhPhotoApp;
 
 
-
 // INITIAL Assignment of Image Values
 // Thru Logo
 logo.style.cssText = `  background-image: ${logoImages[0].src}; 
@@ -525,39 +524,17 @@ logo.style.cssText = `  background-image: ${logoImages[0].src};
 						background-repeat: no-repeat;
 						`;						
 
+
 // EVENT LISTENERS
-// LOGO Event
-// logo.addEventListener("click", () => {
-// 	console.log(`selected logo`);
-// 	goToGallery.scrollIntoView();
-// 	// console.log(goYoGallery)	
-// });
-
-isChecked.addEventListener('click', function(){
-	if(isChecked.checked === true ||
-		isCheckedAlso.checked === true){
-		console.log('checked')
-		menuOverlay.classList.add('toggle');		
-	} else {
-		console.log('unchecked')
-		menuOverlay.classList.remove('toggle');
-	}
-});
-
-
-
-
 // PORTFOLIOS SELECTED Event
 goToGallery.addEventListener('click', function(e){
-	console.log(goToGallery.getBoundingClientRect());
 	category = e.target.childNodes[1].className; 
-	// category = e.target.childNodes[1].className; 
-    console.log(`category is: `,category);
+	// console.log(`category is: `,category); 	
     fhPhotoApp.setCategory();
 })
 
 // GALLERY NAVIGATION
-// Using ARROWS
+// Using Keyboard ARROWS
 document.addEventListener('keydown', (e) => {
     // console.log('key event:', e.code)
     e.code === `ArrowLeft`
@@ -567,9 +544,9 @@ document.addEventListener('keydown', (e) => {
 		: null;
 })
 
-// using ARROW ICONS
+// U  sing ARROW ICONS
 //(DESKTOP Only) Using LEFT & RIGHT Half of Image 
-fhPhotoApp.ifMobile = function (){
+fhPhotoApp.ifNotMobile = function (){
 	if (window.mobileAndTabletCheck() === false) {
 		window.addEventListener("mousedown", (e) => {
 			let xPosition = e.clientX;
@@ -593,6 +570,7 @@ fhPhotoApp.ifMobile = function (){
 			}
 		});
 	} 
+	// Behaviour on mobile...
 	else {		
 		arrowRight.addEventListener('click',() => {
 			fhPhotoApp.forward(); 
@@ -601,7 +579,21 @@ fhPhotoApp.ifMobile = function (){
 			fhPhotoApp.back();
 		});
 	};
-}
+};
+
+
+// Display Gallery Menu Overlay
+isChecked.addEventListener('click', function () {
+	isChecked.checked === true ?
+		menuOverlay.classList.add('toggle')
+		: menuOverlay.classList.remove('toggle');
+});
+
+// Hide Gallery Menu Overlay, if user clicks on overlay vs option
+menuOverlay.addEventListener('click', () => {
+	menuOverlay.classList.remove('toggle');
+});
+
 
 // FUNCTIONS
 // Clears all images...
@@ -622,16 +614,17 @@ fhPhotoApp.setCategory = function() {
 	length = slidesByCategory.length;
 	current = 0; // Reset the Gallery to the First Image[0]
 	fhPhotoApp.displayImage();
+	menuOverlay.classList.remove('toggle');
 	goToPortfolio.scrollIntoView();
 	fhPhotoApp.preloadImages();
 };
 
 // Navigation of Gallery
+// Forward, Right Arrow
 fhPhotoApp.forward = () => {
     (current === slidesByCategory.length - 1)? current = -1 : current;
     fhPhotoApp.slideRight();
 };
-
 fhPhotoApp.slideRight = () => {
     current++;
 	fhPhotoApp.displayImage();
@@ -644,7 +637,8 @@ fhPhotoApp.slideRight = () => {
                 so "current" value of -1 + 1 = 0
             SINCE 0 is the first image, ... we loop to beginning.
         */
-   
+
+// Back, Left Arrow
 fhPhotoApp.back = () => {
     (current === 0) ? current = slidesByCategory.length : current;
     fhPhotoApp.slideLeft(); 
@@ -660,6 +654,7 @@ fhPhotoApp.slideLeft = () => {
             FUNCTION slideLeft()... subtracts 1,
                 "current" sets to last image, ... we loop to the end.
         */
+
 
 // Display Image in Gallery
 fhPhotoApp.displayImage = function () {
@@ -678,7 +673,6 @@ fhPhotoApp.preloadImages = function () {
 			slidesByCategory[current + 1].src
 		}; `;
 	}
-
 	//Preload Previous
 	if (slidesByCategory[current - 1] === undefined) {
 		sliderPrevious.style.cssText = ` background-image : ${
@@ -695,7 +689,7 @@ fhPhotoApp.preloadImages = function () {
 // Initialize
 fhPhotoApp.init = () =>{
 	// fhPhotoApp.activateMenu();
-	fhPhotoApp.ifMobile(); 
+	fhPhotoApp.ifNotMobile(); 
     fhPhotoApp.slideRight();
     fhPhotoApp.slideLeft();
 }

@@ -19,9 +19,7 @@ body{
     min-height: 100vh; //full height backgrounds
     min-height: -webkit-fill-available; 
     //fix for iphone menubar
-    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-    font-family: $primaryFont;
-    
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);    
 }
 
 body, 
@@ -29,7 +27,8 @@ body,
 header,
 nav, 
 .wrapper,
-.slideContent
+.slideContent,
+.background
 {
     font-family: $primaryFont;
     width: 100%;
@@ -37,10 +36,10 @@ nav,
     overflow-x: hidden; 
 }
 
-#fullPageNav{
-    position: relative;
-    height: 100vh;
-}
+// #fullPageNav{
+//     position: relative;
+//     height: 100vh;
+// }
 
 // Main Page
 header {
@@ -60,6 +59,10 @@ h2 {
     // margin: auto;       // element centered
     padding-bottom: 2%; // compensate for visual(vertical) center 
     // object-fit: cover;
+}
+
+li{
+    list-style: none;
 }
 
 header a {
@@ -117,15 +120,14 @@ a{
 	transition: cubic-bezier(.48,.02,.42,1.03), .7s;
 }
     
-li{
-    list-style: none;
-    text-align: center;    
+nav li{
+    text-align: center;  
     a{
         margin: auto;
         text-decoration: none;  
+        pointer-events: none;   
     }  
 }
-
 
 
 // GALLERIES
@@ -212,13 +214,13 @@ input{
     content:'';
     position: absolute;
     margin-top: 0;
-    top: -15px;
+    top: -14px;
 }
 .hamburgerMenu::after{
     content:'';
     position: absolute;
     margin-top: 0;
-    bottom: -15px;   
+    bottom: -14px;   
 }
 
 // Hover over Hamburger
