@@ -130,27 +130,46 @@ nav li{
     // z-index:10;
     font-family: $primaryFont;
     font-weight: 400;
-    font-size: 3rem;
+    font-size: calc(1.6rem + .4vw);
     letter-spacing: .2rem;
     text-transform: uppercase;
     text-align: center;
     background-color: black;
+    width: 80px;
+    filter: grayscale(70%);
+    // transform:scale(1,1);
+    transition: all .7s ease-in-out; 
     a{
         z-index:10;        
         margin: auto;
         text-decoration: none;  
+
         pointer-events: none; 
-        color: #fff;   
+        color: #fff;  
     }  
 }
-.homeNavButon{
-    background-color: black;
+
+nav li:hover{
+    font-size: calc(2.2rem + .4vw);
+    font-weight: 700;
+    filter: grayscale(0);
+        .categoryOverlay{
+            background-color: rgba(0, 0, 0, 0.139);
+        } 
 }
 
+// nav li:not(:hover){
+//         a{
+//         opacity: .8;  
+//     }  
+// }
+
+.homeNavButton{
+    background-color: black;
+}
 .aboutNavButton{
     background-color: rgb(65, 65, 65);
 }
-
 .contactNavButton{
     background-color:rgb(96, 96, 96);
 }
@@ -160,9 +179,11 @@ nav li{
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
+    // filter: grayscale(100%);
 }
 
 .port1{
+    
     background-image: url('../assets/Life16FH-HotWheelsDog.jpg');
 }
 .port2{
@@ -182,7 +203,7 @@ nav li{
     right: 0;
     bottom:0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.53);
+    background-color: rgba(0, 0, 0, 0.43);
     z-index: 8;
     pointer-events: none;
 }
@@ -202,6 +223,8 @@ nav li{
     background-repeat: no-repeat;
     opacity:1;
 }
+
+// Preloaded Images - Hidden from view
 .nextSlide,
 .previousSlide{
     position:absolute;
@@ -240,10 +263,10 @@ nav li{
     margin-right: 40px;
 }
 
+// Animation for slides/ NOT UTILIZED - NEEDS TO BE REWORKED
 .fade{
     animation: fader .25s;
 }
-
 @keyframes fader {
     0%{
         opacity: .8;
@@ -277,6 +300,7 @@ input,
 .menuBox{
     position: absolute;
     z-index: 10;
+    // cursor: grab;
 }
 input,
 .menuBox{     
@@ -378,14 +402,29 @@ input{
 // MEDIA QUERIES
 @media(max-width: 540px){
     // Portfolio Selection Page
+    // .portfolio{
+    //     width: 50%;
+    //     height: 45vh;
+    // }
     .portfolio{
-        width: 50%;
-        height: 45vh;
+        width: 100%;
+        height: calc ( 90vh/4 );
     }
-    .portfolio:not(:hover){
-        background-color:#dedede;
-    }
+    // .portfolio:not(:hover){
+    //     background-color:#dedede;
+    // }
+
+    nav li:hover{
+        // font-size: calc(1.8rem + .4vw);
+        // letter-spacing: .1rem;
+        // font-weight: 600;
+        filter: grayscale(0);
+        .categoryOverlay{
+            background-color: rgba(0, 0, 0, 0.139);
+        } 
+}
     // end --------------------
+
 
 }
 

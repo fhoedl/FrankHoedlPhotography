@@ -375,11 +375,16 @@ a {
 nav li {
   font-family: "neue-haas-grotesk-display", sans-serif;
   font-weight: 400;
-  font-size: 3rem;
+  font-size: calc(1.6rem + .4vw);
   letter-spacing: .2rem;
   text-transform: uppercase;
   text-align: center;
   background-color: black;
+  width: 80px;
+  -webkit-filter: grayscale(70%);
+          filter: grayscale(70%);
+  -webkit-transition: all .7s ease-in-out;
+  transition: all .7s ease-in-out;
 }
 
 nav li a {
@@ -390,7 +395,18 @@ nav li a {
   color: #fff;
 }
 
-.homeNavButon {
+nav li:hover {
+  font-size: calc(2.2rem + .4vw);
+  font-weight: 700;
+  -webkit-filter: grayscale(0);
+          filter: grayscale(0);
+}
+
+nav li:hover .categoryOverlay {
+  background-color: rgba(0, 0, 0, 0.139);
+}
+
+.homeNavButton {
   background-color: black;
 }
 
@@ -432,7 +448,7 @@ nav li a {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.53);
+  background-color: rgba(0, 0, 0, 0.43);
   z-index: 8;
   pointer-events: none;
 }
@@ -667,10 +683,14 @@ input {
 
 @media (max-width: 540px) {
   .portfolio {
-    width: 50%;
-    height: 45vh;
+    width: 100%;
+    height: calc 22.5vh;
   }
-  .portfolio:not(:hover) {
-    background-color: #dedede;
+  nav li:hover {
+    -webkit-filter: grayscale(0);
+            filter: grayscale(0);
+  }
+  nav li:hover .categoryOverlay {
+    background-color: rgba(0, 0, 0, 0.139);
   }
 }

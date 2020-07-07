@@ -525,8 +525,9 @@ const {
 	hamburger,
 } = fhPhotoApp;
 
-// INITIAL Assignment of Image Values
 
+// LOGO SLIDESHOW(s)
+// Flashing Preloader "thru" Logo
 fhPhotoApp.flashSlideShow = () => {
 	logo.style.cssText = `
 		background-image: ${logoImages[logoCount].src};
@@ -542,7 +543,7 @@ fhPhotoApp.flashSlideShow = () => {
 		`;
 	}
 }
-
+// Slideshow "thru" Logo
 fhPhotoApp.autoSlideShow = () => {
 	logo.style.cssText = `
 		background-image: ${logoImages[logoCount].src};
@@ -554,14 +555,16 @@ fhPhotoApp.autoSlideShow = () => {
 	}
 	timer = setTimeout("fhPhotoApp.autoSlideShow()", slideInterval);
 }
+// end Logo Slideshow ---------------------
 
-
-logoLink.addEventListener('click', function(){
+// EVENT LISTENERS
+// LOGO CLICKED, redirection to Main Navigation Page
+logoLink.addEventListener('click', function () {
 	clearTimeout(timer);
-	if (logoImages[logoCount-1] === undefined){
-		logoCount = logoImages.length -1;
-	}else{
-		logoCount = logoCount -1;
+	if (logoImages[logoCount - 1] === undefined) {
+		logoCount = logoImages.length - 1;
+	} else {
+		logoCount = logoCount - 1;
 	};
 	logo.style.cssText = `
 		background-image: ${logoImages[logoCount].src};
@@ -569,12 +572,9 @@ logoLink.addEventListener('click', function(){
 		`;
 })
 
-
-// EVENT LISTENERS
 // PORTFOLIOS SELECTED Event
 goToGallery.addEventListener('click', function(e){
 	category = e.target.childNodes[1].className; 
-	// console.log(`category is: `,category); 	
 	fhPhotoApp.setCategory();
 	// clearTimeout("fhPhotoApp.autoSlideShow()")
 })
@@ -582,7 +582,6 @@ goToGallery.addEventListener('click', function(e){
 // GALLERY NAVIGATION
 // Using Keyboard ARROWS
 document.addEventListener('keydown', (e) => {
-    // console.log('key event:', e.code)
     e.code === `ArrowLeft`
 		? fhPhotoApp.back()
 		: e.code === `ArrowRight`
@@ -590,7 +589,7 @@ document.addEventListener('keydown', (e) => {
 		: null;
 })
 
-// U  sing ARROW ICONS
+// Using ARROW ICONS
 //(DESKTOP Only) Using LEFT & RIGHT Half of Image 
 fhPhotoApp.ifNotMobile = function (){
 	if (window.mobileAndTabletCheck() === false) {
@@ -627,7 +626,6 @@ fhPhotoApp.ifNotMobile = function (){
 	};
 };
 
-
 // Display Gallery Menu Overlay
 // Animate hamburger to x
 isChecked.addEventListener('click', function () {
@@ -635,23 +633,19 @@ isChecked.addEventListener('click', function () {
 		menuOverlay.classList.add('toggle');
 		hamburger.classList.add('animatedNav');
 	}else{
-		menuOverlay.classList.remove('toggle');
-		hamburger.classList.remove('animatedNav');
+		fhPhotoApp.removeOverlay();
 	}
 });
 
 // Hide Gallery Menu Overlay, if user clicks on overlay vs option
 menuOverlay.addEventListener('click', () => {
-	menuOverlay.classList.remove('toggle');
-	hamburger.classList.remove('animatedNav');
+	fhPhotoApp.removeOverlay();
 });
-
 
 // FUNCTIONS
 // Clears all images...
 fhPhotoApp.reset = () => {
     for(let i=0; i<slides.length; i++) {         
-		// document.body.classList.add("fade");
         sliderImages.style.display = 'none';
 }};
 
@@ -661,20 +655,23 @@ fhPhotoApp.startSlide = () => {
     sliderImages.style.display = 'block' 
 };
 
+// Removing Menu Overlay & Reset Hamburger
+fhPhotoApp.removeOverlay = () => {
+	menuOverlay.classList.remove('toggle');
+	hamburger.classList.remove('animatedNav');
+}
+
 // Selecting Portfolio Category
 fhPhotoApp.setCategory = function() {
 	slidesByCategory = slides.filter((slide) => slide.cat === category);
 	length = slidesByCategory.length;
 	current = 0; // Reset the Gallery to the First Image[0]
 	fhPhotoApp.displayImage();
-	menuOverlay.classList.remove('toggle');
-	hamburger.classList.remove('animatedNav');
+	fhPhotoApp.removeOverlay();
 	goToPortfolio.scrollIntoView();
-	fhPhotoApp.preloadImages();
-	
 };
 
-// Navigation of Gallery
+// Gallery NAVIGATION
 // Forward, Right Arrow
 fhPhotoApp.forward = () => {
     (current === slidesByCategory.length - 1)? current = -1 : current;
@@ -682,9 +679,7 @@ fhPhotoApp.forward = () => {
 };
 fhPhotoApp.slideRight = () => {
 	current++;
-	// document.body.classList.add("fade");
 	fhPhotoApp.displayImage();
-	fhPhotoApp.preloadImages();
 };
         /*  NOTE: based on count INCREASING...
             ONCE WE GET TO LAST IMAGE( the condition)
@@ -702,7 +697,6 @@ fhPhotoApp.back = () => {
 fhPhotoApp.slideLeft = () => {
     current--;
 	fhPhotoApp.displayImage();
-	fhPhotoApp.preloadImages();
 };
         /*  NOTE: based on count DECREASING...
             ONCE WE GET TO THE FIRST IMAGE (the condition)
@@ -711,18 +705,19 @@ fhPhotoApp.slideLeft = () => {
                 "current" sets to last image, ... we loop to the end.
         */
 
-// Display Image in Gallery
+// DISPLAY Image in Gallery
 fhPhotoApp.displayImage = function () {
-	sliderImages.classList.add("fade");
-	let fadeIn = function () {
-		sliderImages.classList.remove("fade");
-	};
-	setTimeout(fadeIn, 250);
+	fhPhotoApp.preloadImages();
+		//Animated Fading?
+		// sliderImages.classList.add("fade");
+		// let fadeIn = function () {
+		// 	sliderImages.classList.remove("fade");
+		// };
+		// setTimeout(fadeIn, 250);
 	sliderImages.style.cssText =
 		`background-image : ${slidesByCategory[current].src}; `;
 	sliderImages.setAttribute(`alt`, slidesByCategory[current].alt);
 };
-
 
 fhPhotoApp.preloadImages = () =>{
 	// preload NEXT image
@@ -733,7 +728,6 @@ fhPhotoApp.preloadImages = () =>{
 		sliderNext.style.cssText = 
 			` background-image : ${slidesByCategory[current + 1].src};`;
 	}
-
 	//Preload PREVIOUS
 	if (slidesByCategory[current - 1] === undefined) {
 		sliderPrevious.style.cssText =
@@ -747,15 +741,13 @@ fhPhotoApp.preloadImages = () =>{
 
 // Initialize
 fhPhotoApp.init = () =>{
-	// fhPhotoApp.activateMenu();
+	console.log('Welcome to Frank Hoedl Photography, all images are copyright Frank Hoedl')
 	fhPhotoApp.ifNotMobile();
 	fhPhotoApp.autoSlideShow(); 
 	fhPhotoApp.flashSlideShow(); 
     fhPhotoApp.slideRight();
 	fhPhotoApp.slideLeft();
-	// document.body.classList.remove("fade"); //remove fade effect
 }
-
 
 // Document Ready
 let ready = (callback) => {
@@ -763,7 +755,6 @@ let ready = (callback) => {
     else document.addEventListener("DOMContentLoaded", callback);
 }
 ready(() => {
-	console.log('Welcome to Frank Hoedl Photography, all images are copyright Frank Hoedl')
 	fhPhotoApp.init();
 });
 
