@@ -268,6 +268,7 @@ body {
 
 body,
 #slider,
+#about,
 header,
 nav,
 .wrapper,
@@ -319,8 +320,10 @@ a {
 .logoClip {
   -webkit-background-clip: text;
   background-clip: text;
-  color: black;
   color: transparent;
+  background-size: cover;
+  background-position: 70% 100%;
+  background-repeat: no-repeat;
 }
 
 .logoClip:hover {
@@ -349,7 +352,6 @@ a {
 
 .siteNavButton,
 .portfolio {
-  border: 1px solid red;
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
@@ -371,12 +373,67 @@ a {
 }
 
 nav li {
+  font-family: "neue-haas-grotesk-display", sans-serif;
+  font-weight: 400;
+  font-size: 3rem;
+  letter-spacing: .2rem;
+  text-transform: uppercase;
   text-align: center;
+  background-color: black;
 }
 
 nav li a {
+  z-index: 10;
   margin: auto;
   text-decoration: none;
+  pointer-events: none;
+  color: #fff;
+}
+
+.homeNavButon {
+  background-color: black;
+}
+
+.aboutNavButton {
+  background-color: #414141;
+}
+
+.contactNavButton {
+  background-color: #606060;
+}
+
+.portfolio {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.port1 {
+  background-image: url("../assets/Life16FH-HotWheelsDog.jpg");
+}
+
+.port2 {
+  background-image: url("../assets/People02FH-MastercardPool.jpg");
+}
+
+.port3 {
+  background-image: url("../assets/Land14FH-AppletonWaterTower.jpg");
+}
+
+.port4 {
+  background-image: url("../assets/Auto02FH-FordWideRoadwayShot.jpg");
+  background-position: 10% 100%;
+}
+
+.categoryOverlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.53);
+  z-index: 8;
   pointer-events: none;
 }
 
@@ -389,6 +446,7 @@ nav li a {
 }
 
 .slide {
+  background-color: black;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -432,6 +490,65 @@ nav li a {
   border-color: transparent transparent transparent #2bc5f4;
   right: 0;
   margin-right: 40px;
+}
+
+.fade {
+  -webkit-animation: fader .25s;
+          animation: fader .25s;
+}
+
+@-webkit-keyframes fader {
+  0% {
+    opacity: .8;
+  }
+  15% {
+    opacity: .8;
+  }
+  30% {
+    opacity: .8;
+  }
+  50% {
+    opacity: .8;
+  }
+  60% {
+    opacity: .9;
+  }
+  75% {
+    opacity: .9;
+  }
+  87% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fader {
+  0% {
+    opacity: .8;
+  }
+  15% {
+    opacity: .8;
+  }
+  30% {
+    opacity: .8;
+  }
+  50% {
+    opacity: .8;
+  }
+  60% {
+    opacity: .9;
+  }
+  75% {
+    opacity: .9;
+  }
+  87% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .menu,
@@ -489,6 +606,24 @@ input {
   background-color: white;
 }
 
+.animatedNav::after {
+  -webkit-transform: rotate(-270deg) translate(-14px);
+          transform: rotate(-270deg) translate(-14px);
+  -webkit-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+}
+
+.animatedNav {
+  -webkit-transform: rotate(-225deg);
+          transform: rotate(-225deg);
+  -webkit-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+}
+
+.animatedNav::before {
+  visibility: hidden;
+}
+
 .menuItems {
   position: absolute;
   z-index: 8;
@@ -525,6 +660,11 @@ input {
   visibility: visible;
 }
 
+.info {
+  display: -ms-grid;
+  display: grid;
+}
+
 @media (max-width: 540px) {
   .portfolio {
     width: 50%;
@@ -533,22 +673,4 @@ input {
   .portfolio:not(:hover) {
     background-color: #dedede;
   }
-}
-
-.animatedNav::after {
-  -webkit-transform: rotate(-270deg) translate(-14px);
-          transform: rotate(-270deg) translate(-14px);
-  -webkit-transition: all .5s ease-in-out;
-  transition: all .5s ease-in-out;
-}
-
-.animatedNav {
-  -webkit-transform: rotate(-225deg);
-          transform: rotate(-225deg);
-  -webkit-transition: all .5s ease-in-out;
-  transition: all .5s ease-in-out;
-}
-
-.animatedNav::before {
-  visibility: hidden;
 }

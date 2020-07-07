@@ -450,16 +450,19 @@ fhPhotoApp.logoImages = [
 	})
 ];
 
-
 // ARGUMENTS
 fhPhotoApp.slidesByCategory = fhPhotoApp.slides; // Duplicate for Category Sorting
 fhPhotoApp.current = 0; //image counter
 fhPhotoApp.category = '' //temporary
-fhPhotoApp.length = fhPhotoApp.slides.length; 
+fhPhotoApp.length = fhPhotoApp.slides.length;
+fhPhotoApp.slideInterval = 2000; //slideshow timing 
+fhPhotoApp.logoCount = 0
+fhPhotoApp.timer; 
 
 
 // SELECTORS
 fhPhotoApp.logo = document.querySelector('.logoClip');
+fhPhotoApp.logoLink = document.querySelector('header a');
 fhPhotoApp.sliderImages = document.querySelector('.slide');
 fhPhotoApp.sliderPrevious = document.querySelector(".previousSlide");
 fhPhotoApp.sliderNext = document.querySelector(".nextSlide");
@@ -492,19 +495,24 @@ window.mobileAndTabletCheck = function () {
 };
 
 // NameSpacing Destructured.
-let{
-    current, 
-    category, 
-    slides, 
+let {
+	current,
+	category,
+	slides,
 	slidesByCategory,
 	logoImages,
 	length,
 	isChecked,
-	width 
+	logoCount,
+	width,
+	slideInterval,
+	timer,
 } = fhPhotoApp;
 
-const{
+const {
 	logo,
+	logoLink,
+	logoNext,
 	sliderImages,
 	sliderNext,
 	sliderPrevious,
@@ -517,14 +525,49 @@ const{
 	hamburger,
 } = fhPhotoApp;
 
-
 // INITIAL Assignment of Image Values
-// Thru Logo
-logo.style.cssText = `  background-image: ${logoImages[0].src}; 
-                        background-size: cover;
-						background-position: 70% 100%; 
-						background-repeat: no-repeat;
-						`;						
+
+fhPhotoApp.flashSlideShow = () => {
+	logo.style.cssText = `
+		background-image: ${logoImages[logoCount].src};
+		opacity: ${logoCount/5}; 
+		`;
+	if (logoCount < logoImages.length - 1) {
+		logoCount++;
+		setTimeout(fhPhotoApp.flashSlideShow, 100 + logoCount*25);
+	} else {
+		logoCount = 0;
+		logo.style.cssText = `
+		background-image: ${logoImages[logoCount].src};
+		`;
+	}
+}
+
+fhPhotoApp.autoSlideShow = () => {
+	logo.style.cssText = `
+		background-image: ${logoImages[logoCount].src};
+		`;	
+	if (logoCount < logoImages.length - 1) {
+		logoCount++;
+	}else {
+		logoCount = 0;
+	}
+	timer = setTimeout("fhPhotoApp.autoSlideShow()", slideInterval);
+}
+
+
+logoLink.addEventListener('click', function(){
+	clearTimeout(timer);
+	if (logoImages[logoCount-1] === undefined){
+		logoCount = logoImages.length -1;
+	}else{
+		logoCount = logoCount -1;
+	};
+	logo.style.cssText = `
+		background-image: ${logoImages[logoCount].src};
+		color: hsla(0, 0%, 0%, 0.502);
+		`;
+})
 
 
 // EVENT LISTENERS
@@ -532,7 +575,8 @@ logo.style.cssText = `  background-image: ${logoImages[0].src};
 goToGallery.addEventListener('click', function(e){
 	category = e.target.childNodes[1].className; 
 	// console.log(`category is: `,category); 	
-    fhPhotoApp.setCategory();
+	fhPhotoApp.setCategory();
+	// clearTimeout("fhPhotoApp.autoSlideShow()")
 })
 
 // GALLERY NAVIGATION
@@ -607,6 +651,7 @@ menuOverlay.addEventListener('click', () => {
 // Clears all images...
 fhPhotoApp.reset = () => {
     for(let i=0; i<slides.length; i++) {         
+		// document.body.classList.add("fade");
         sliderImages.style.display = 'none';
 }};
 
@@ -626,6 +671,7 @@ fhPhotoApp.setCategory = function() {
 	hamburger.classList.remove('animatedNav');
 	goToPortfolio.scrollIntoView();
 	fhPhotoApp.preloadImages();
+	
 };
 
 // Navigation of Gallery
@@ -635,7 +681,8 @@ fhPhotoApp.forward = () => {
     fhPhotoApp.slideRight();
 };
 fhPhotoApp.slideRight = () => {
-    current++;
+	current++;
+	// document.body.classList.add("fade");
 	fhPhotoApp.displayImage();
 	fhPhotoApp.preloadImages();
 };
@@ -664,33 +711,36 @@ fhPhotoApp.slideLeft = () => {
                 "current" sets to last image, ... we loop to the end.
         */
 
-
 // Display Image in Gallery
 fhPhotoApp.displayImage = function () {
-    sliderImages.style.cssText = `   background-image : ${slidesByCategory[current].src}; `;
-    sliderImages.setAttribute(`alt`, slidesByCategory[current].alt);
+	sliderImages.classList.add("fade");
+	let fadeIn = function () {
+		sliderImages.classList.remove("fade");
+	};
+	setTimeout(fadeIn, 250);
+	sliderImages.style.cssText =
+		`background-image : ${slidesByCategory[current].src}; `;
+	sliderImages.setAttribute(`alt`, slidesByCategory[current].alt);
 };
 
-fhPhotoApp.preloadImages = function () {
-	// preload next image
+
+fhPhotoApp.preloadImages = () =>{
+	// preload NEXT image
 	if (slidesByCategory[current + 1] === undefined) {
-		sliderNext.style.cssText = ` background-image : ${
-			slidesByCategory[current].src
-		}; `;
+		sliderNext.style.cssText = 
+			` background-image : ${slidesByCategory[current].src};`;
 	} else {
-		sliderNext.style.cssText = ` background-image : ${
-			slidesByCategory[current + 1].src
-		}; `;
+		sliderNext.style.cssText = 
+			` background-image : ${slidesByCategory[current + 1].src};`;
 	}
-	//Preload Previous
+
+	//Preload PREVIOUS
 	if (slidesByCategory[current - 1] === undefined) {
-		sliderPrevious.style.cssText = ` background-image : ${
-			slidesByCategory[length - 1].src
-			}; `;
+		sliderPrevious.style.cssText =
+			` background-image : ${slidesByCategory[length - 1].src};`;
 	} else {
-		sliderPrevious.style.cssText = ` background-image : ${
-			slidesByCategory[current - 1].src
-		}; `;
+		sliderPrevious.style.cssText =
+			` background-image : ${slidesByCategory[current - 1].src}; `;
 	}
 }
 
@@ -698,17 +748,22 @@ fhPhotoApp.preloadImages = function () {
 // Initialize
 fhPhotoApp.init = () =>{
 	// fhPhotoApp.activateMenu();
-	fhPhotoApp.ifNotMobile(); 
+	fhPhotoApp.ifNotMobile();
+	fhPhotoApp.autoSlideShow(); 
+	fhPhotoApp.flashSlideShow(); 
     fhPhotoApp.slideRight();
-    fhPhotoApp.slideLeft();
+	fhPhotoApp.slideLeft();
+	// document.body.classList.remove("fade"); //remove fade effect
 }
+
+
 // Document Ready
 let ready = (callback) => {
     if (document.readyState != "loading") callback();
     else document.addEventListener("DOMContentLoaded", callback);
 }
 ready(() => {
-    console.log('Welcome to Frank Hoedl Photography, all images are copyright Frank Hoedl')
-    fhPhotoApp.init();
+	console.log('Welcome to Frank Hoedl Photography, all images are copyright Frank Hoedl')
+	fhPhotoApp.init();
 });
 
