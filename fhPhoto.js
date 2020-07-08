@@ -463,6 +463,7 @@ fhPhotoApp.timer;
 // SELECTORS
 fhPhotoApp.logo = document.querySelector('.logoClip');
 fhPhotoApp.logoLink = document.querySelector('header a');
+fhPhotoApp.sliderBackImage = document.querySelector('.backSlide');
 fhPhotoApp.sliderImages = document.querySelector('.slide');
 fhPhotoApp.sliderPrevious = document.querySelector(".previousSlide");
 fhPhotoApp.sliderNext = document.querySelector(".nextSlide");
@@ -499,6 +500,7 @@ let {
 	current,
 	category,
 	slides,
+	sliderBackImage,
 	slidesByCategory,
 	logoImages,
 	length,
@@ -528,6 +530,8 @@ const {
 
 // LOGO SLIDESHOW(s)
 // Flashing Preloader "thru" Logo
+
+
 fhPhotoApp.flashSlideShow = () => {
 	logo.style.cssText = `
 		background-image: ${logoImages[logoCount].src};
@@ -555,6 +559,14 @@ fhPhotoApp.autoSlideShow = () => {
 	}
 	timer = setTimeout("fhPhotoApp.autoSlideShow()", slideInterval);
 }
+// REWORK
+	//Animated Fading?
+	// sliderImages.classList.add("fade");
+	// let fadeIn = function () {
+	// 	sliderImages.classList.remove("fade");
+	// };
+	// setTimeout(fadeIn, 250);
+
 // end Logo Slideshow ---------------------
 
 // EVENT LISTENERS
@@ -671,14 +683,23 @@ fhPhotoApp.setCategory = function() {
 	goToPortfolio.scrollIntoView();
 };
 
+
 // Gallery NAVIGATION
+//Assign background slide to enable slide effect
+fhPhotoApp.backgroundSlide = function(){
+	sliderBackImage.style.cssText =
+		`background-image : ${slidesByCategory[current].src}; `;
+}
+
 // Forward, Right Arrow
 fhPhotoApp.forward = () => {
+	fhPhotoApp.backgroundSlide();
     (current === slidesByCategory.length - 1)? current = -1 : current;
-    fhPhotoApp.slideRight();
+	fhPhotoApp.slideRight();
 };
 fhPhotoApp.slideRight = () => {
 	current++;
+	sliderImages.classList.add("slideFromRight");
 	fhPhotoApp.displayImage();
 };
         /*  NOTE: based on count INCREASING...
@@ -691,11 +712,13 @@ fhPhotoApp.slideRight = () => {
 
 // Back, Left Arrow
 fhPhotoApp.back = () => {
+	fhPhotoApp.backgroundSlide();
     (current === 0) ? current = slidesByCategory.length : current;
     fhPhotoApp.slideLeft(); 
 };
 fhPhotoApp.slideLeft = () => {
-    current--;
+	current--;
+	sliderImages.classList.add("slideFromLeft");
 	fhPhotoApp.displayImage();
 };
         /*  NOTE: based on count DECREASING...
@@ -705,18 +728,20 @@ fhPhotoApp.slideLeft = () => {
                 "current" sets to last image, ... we loop to the end.
         */
 
+
 // DISPLAY Image in Gallery
 fhPhotoApp.displayImage = function () {
 	fhPhotoApp.preloadImages();
-		//Animated Fading?
-		// sliderImages.classList.add("fade");
-		// let fadeIn = function () {
-		// 	sliderImages.classList.remove("fade");
-		// };
-		// setTimeout(fadeIn, 250);
+	// render slide to page...
 	sliderImages.style.cssText =
 		`background-image : ${slidesByCategory[current].src}; `;
-	sliderImages.setAttribute(`alt`, slidesByCategory[current].alt);
+	sliderImages.setAttribute(`alt`, slidesByCategory[current].alt)
+	// clear animation, (reset on next/previous)
+	let clearAdded = () => {
+		sliderImages.classList.remove("slideFromRight");
+		sliderImages.classList.remove("slideFromLeft");
+	}
+	setTimeout(clearAdded, 270);
 };
 
 fhPhotoApp.preloadImages = () =>{

@@ -461,8 +461,11 @@ nav li:hover .categoryOverlay {
   position: relative;
 }
 
-.slide {
-  background-color: black;
+.slide,
+.backSlide,
+.nextSlide,
+.previousSlide {
+  position: absolute;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -473,15 +476,56 @@ nav li:hover .categoryOverlay {
 .previousSlide {
   position: absolute;
   opacity: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
-  width: 100%;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+}
+
+.slideFromRight {
+  -webkit-animation-delay: 100ms;
+          animation-delay: 100ms;
+  -webkit-animation: slidesRight 250ms ease-in-out;
+          animation: slidesRight 250ms ease-in-out;
+}
+
+@-webkit-keyframes slidesRight {
+  0% {
+    right: -100%;
+  }
+  100% {
+    right: 0%;
+  }
+}
+
+@keyframes slidesRight {
+  0% {
+    right: -100%;
+  }
+  100% {
+    right: 0%;
+  }
+}
+
+.slideFromLeft {
+  -webkit-animation-delay: 100ms;
+          animation-delay: 100ms;
+  -webkit-animation: slidesLeft 250ms ease-in-out;
+          animation: slidesLeft 250ms ease-in-out;
+}
+
+@-webkit-keyframes slidesLeft {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 0%;
+  }
+}
+
+@keyframes slidesLeft {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 0%;
+  }
 }
 
 .arrow {
