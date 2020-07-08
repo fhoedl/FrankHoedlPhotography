@@ -49,7 +49,30 @@ header {
 header div{
     margin: auto;       // element centered
     position: relative;
+    // margin-bottom: 100px;
+    padding-bottom: 9vh;
 }
+
+h1{
+    text-align: center;
+    position: absolute;
+    bottom: 9vh;
+    left: 2%;
+    right: 2%;
+    font-size: calc(2.5rem + 1.1vw);
+    font-weight: 300; 
+    line-height: .8;
+    text-transform: uppercase; 
+    letter-spacing: .1rem;
+    span{
+        // font-size: calc(2.4rem + 1vw);
+        font-weight: 700; 
+        display: block;
+        letter-spacing: .1rem;
+    }
+    
+}
+
 
 header a,
 h2 {
@@ -58,7 +81,7 @@ h2 {
     line-height: 1.6;
     text-transform: uppercase; 
     // margin: auto;       // element centered
-    padding-bottom: 2%; // compensate for visual(vertical) center 
+    // padding-bottom: 5%; // compensate for visual(vertical) center 
     // object-fit: cover;
 }
 
