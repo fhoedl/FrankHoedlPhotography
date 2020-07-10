@@ -461,24 +461,32 @@ fhPhotoApp.timer;
 
 
 // SELECTORS
-fhPhotoApp.logo = document.querySelector('.logoClip');
-fhPhotoApp.logoLink = document.querySelector('header a');
-fhPhotoApp.sliderBackImage = document.querySelector('.backSlide');
-fhPhotoApp.sliderImages = document.querySelector('.slide');
-fhPhotoApp.sliderPrevious = document.querySelector(".previousSlide");
-fhPhotoApp.sliderNext = document.querySelector(".nextSlide");
-fhPhotoApp.arrowLeft = document.querySelector('#arrowLeft');
-fhPhotoApp.arrowRight = document.querySelector('#arrowRight');
-fhPhotoApp.goToGallery = document.querySelector('#fullPageNav');
+fhPhotoApp.goToGallery = document.querySelector(".portfolioContainer");
+
+	// for logo
+fhPhotoApp.home = document.querySelector('#home');
+	let headerDiv = fhPhotoApp.home;
+	fhPhotoApp.logo = headerDiv.querySelector('.logoClip');
+	fhPhotoApp.logoLink = headerDiv.querySelector("header a");
+
+	// for slideshow
 fhPhotoApp.goToPortfolio = document.querySelector(`#slider`);
-fhPhotoApp.width = document.documentElement.clientWidth;
-fhPhotoApp.isChecked =document.querySelector('input')
-// fhPhotoApp.isCheckedAlso = document.querySelector('.menuBox')
-fhPhotoApp.menuOverlay = document.querySelector('.menuItems')
-fhPhotoApp.hamburger = document.querySelector('.hamburgerMenu')
+	let slider = fhPhotoApp.goToPortfolio;
+	fhPhotoApp.sliderBackImage = slider.querySelector('.backSlide');
+	fhPhotoApp.sliderImages = slider.querySelector('.slide');
+	fhPhotoApp.sliderPrevious = slider.querySelector(".previousSlide");
+	fhPhotoApp.sliderNext = slider.querySelector(".nextSlide");
+	fhPhotoApp.arrowLeft = slider.querySelector('#arrowLeft');
+	fhPhotoApp.arrowRight = slider.querySelector('#arrowRight');
+	fhPhotoApp.navRedirects = document.querySelector('.siteNavContainer');
 
+	fhPhotoApp.isChecked = slider.querySelector('input')
+	fhPhotoApp.menuOverlay = slider.querySelector('.menuItems')
+	fhPhotoApp.hamburger = slider.querySelector('.hamburgerMenu')
+	fhPhotoApp.width = slider.clientWidth;
 
-
+	
+// Mobile device check...
 window.mobileAndTabletCheck = function () {
 	let check = false;
 	(function (a) {
@@ -495,7 +503,7 @@ window.mobileAndTabletCheck = function () {
 	return check;
 };
 
-// NameSpacing Destructured.
+// NameSpacing Destructuring
 let {
 	current,
 	category,
@@ -525,13 +533,12 @@ const {
 	menuOverlay,
 	isCheckedAlso,
 	hamburger,
+	navRedirects
 } = fhPhotoApp;
 
 
 // LOGO SLIDESHOW(s)
 // Flashing Preloader "thru" Logo
-
-
 fhPhotoApp.flashSlideShow = () => {
 	logo.style.cssText = `
 		background-image: ${logoImages[logoCount].src};
@@ -559,15 +566,7 @@ fhPhotoApp.autoSlideShow = () => {
 	}
 	timer = setTimeout("fhPhotoApp.autoSlideShow()", slideInterval);
 }
-// REWORK
-	//Animated Fading?
-	// sliderImages.classList.add("fade");
-	// let fadeIn = function () {
-	// 	sliderImages.classList.remove("fade");
-	// };
-	// setTimeout(fadeIn, 250);
 
-// end Logo Slideshow ---------------------
 
 // EVENT LISTENERS
 // LOGO CLICKED, redirection to Main Navigation Page
@@ -588,7 +587,6 @@ logoLink.addEventListener('click', function () {
 goToGallery.addEventListener('click', function(e){
 	category = e.target.childNodes[1].className; 
 	fhPhotoApp.setCategory();
-	// clearTimeout("fhPhotoApp.autoSlideShow()")
 })
 
 // GALLERY NAVIGATION
@@ -654,6 +652,7 @@ menuOverlay.addEventListener('click', () => {
 	fhPhotoApp.removeOverlay();
 });
 
+
 // FUNCTIONS
 // Clears all images...
 fhPhotoApp.reset = () => {
@@ -671,17 +670,17 @@ fhPhotoApp.startSlide = () => {
 fhPhotoApp.removeOverlay = () => {
 	menuOverlay.classList.remove('toggle');
 	hamburger.classList.remove('animatedNav');
-}
+};
 
 // Selecting Portfolio Category
-fhPhotoApp.setCategory = function() {
+fhPhotoApp.setCategory = function () {
 	slidesByCategory = slides.filter((slide) => slide.cat === category);
 	length = slidesByCategory.length;
 	current = 0; // Reset the Gallery to the First Image[0]
 	fhPhotoApp.displayImage();
 	fhPhotoApp.removeOverlay();
 	goToPortfolio.scrollIntoView();
-};
+};;
 
 
 // Gallery NAVIGATION
@@ -689,11 +688,12 @@ fhPhotoApp.setCategory = function() {
 fhPhotoApp.backgroundSlide = function(){
 	sliderBackImage.style.cssText =
 		`background-image : ${slidesByCategory[current].src}; `;
-}
+};
 
 // Forward, Right Arrow
 fhPhotoApp.forward = () => {
 	fhPhotoApp.backgroundSlide();
+	// Handling forward on last slide ->resetting to 1st slide
     (current === slidesByCategory.length - 1)? current = -1 : current;
 	fhPhotoApp.slideRight();
 };
@@ -702,17 +702,11 @@ fhPhotoApp.slideRight = () => {
 	sliderImages.classList.add("slideFromRight");
 	fhPhotoApp.displayImage();
 };
-        /*  NOTE: based on count INCREASING...
-            ONCE WE GET TO LAST IMAGE( the condition)
-                sets "current" to -1, 
-            FUNCTION slideRight()... adds 1, 
-                so "current" value of -1 + 1 = 0
-            SINCE 0 is the first image, ... we loop to beginning.
-        */
 
 // Back, Left Arrow
 fhPhotoApp.back = () => {
-	fhPhotoApp.backgroundSlide();
+	fhPhotoApp.backgroundSlide();	
+	// Handling back on 1st slide ->resetting to last last side
     (current === 0) ? current = slidesByCategory.length : current;
     fhPhotoApp.slideLeft(); 
 };
@@ -721,13 +715,6 @@ fhPhotoApp.slideLeft = () => {
 	sliderImages.classList.add("slideFromLeft");
 	fhPhotoApp.displayImage();
 };
-        /*  NOTE: based on count DECREASING...
-            ONCE WE GET TO THE FIRST IMAGE (the condition)
-                sets "current" to length value (the number of images)
-            FUNCTION slideLeft()... subtracts 1,
-                "current" sets to last image, ... we loop to the end.
-        */
-
 
 // DISPLAY Image in Gallery
 fhPhotoApp.displayImage = function () {
@@ -762,7 +749,6 @@ fhPhotoApp.preloadImages = () =>{
 			` background-image : ${slidesByCategory[current - 1].src}; `;
 	}
 }
-
 
 // Initialize
 fhPhotoApp.init = () =>{

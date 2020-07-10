@@ -14,42 +14,52 @@ html {
 
 body{
     font-size: 1.6rem; //base font size
+    font-family: $primaryFont;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    min-height: stretch; 
     min-height: 100vh; //full height backgrounds
-    min-height: -webkit-fill-available; 
     //fix for iphone menubar
     padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); 
+}
+
+.wrapper{
+    margin: 0 5%;
+    max-width: 1440px;
+    width: 90%;
+}
+
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: black;   
 }
 
 body, 
 #slider,
 #about,
+// .infoContainer,
 header,
 nav, 
 .wrapper,
 .slideContent,
 .background
 {
-    font-family: $primaryFont;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     overflow-x: hidden; 
 }
 
-// #fullPageNav{
-//     position: relative;
-//     height: 100vh;
-// }
 
 // Main Page
 header {
     display: flex;
 }
 header div{
-    margin: auto;       // element centered
+    margin: auto; // element centered
     position: relative;
-    // margin-bottom: 100px;
     padding-bottom: 9vh;
 }
 
@@ -69,24 +79,15 @@ h1{
         font-weight: 700; 
         display: block;
         letter-spacing: .1rem;
-    }
-    
+    }   
 }
 
-
-header a,
-h2 {
+h2,
+header a{
     font-size: calc( 15rem + 6vw);
     font-weight: 700; 
     line-height: 1.6;
     text-transform: uppercase; 
-    // margin: auto;       // element centered
-    // padding-bottom: 5%; // compensate for visual(vertical) center 
-    // object-fit: cover;
-}
-
-li{
-    list-style: none;
 }
 
 header a {
@@ -96,15 +97,9 @@ header a {
     left: 0;
     top: 0;
 }
- 
-a{
-    text-decoration: none;
-    color: black;
-    
-}
+
 
 // Clipping within text
-
 .logoClip{
     -webkit-background-clip: text;
     background-clip: text;  
@@ -113,7 +108,6 @@ a{
     background-position: 70% 100%; 
     background-repeat: no-repeat;
 }
-
 
 .logoClip:hover{
     font-size: 30rem; 
@@ -150,7 +144,6 @@ a{
 }
     
 nav li{
-    // z-index:10;
     font-family: $primaryFont;
     font-weight: 400;
     font-size: calc(1.6rem + .4vw);
@@ -160,16 +153,24 @@ nav li{
     background-color: black;
     width: 80px;
     filter: grayscale(70%);
-    // transform:scale(1,1);
     transition: all .7s ease-in-out; 
     a{
         z-index:10;        
         margin: auto;
         text-decoration: none;  
-
-        pointer-events: none; 
         color: #fff;  
     }  
+}
+
+.menuButton a{
+    pointer-events: none; ;
+}
+
+.siteNavButton a{
+    padding: 3vh;
+    overflow: hidden;
+    width: 100%;
+
 }
 
 nav li:hover{
@@ -181,11 +182,10 @@ nav li:hover{
         } 
 }
 
-// nav li:not(:hover){
-//         a{
-//         opacity: .8;  
-//     }  
-// }
+.siteNavButton a:hover{
+    padding: 1.5vh;
+}
+
 
 .homeNavButton{
     background-color: black;
@@ -202,11 +202,9 @@ nav li:hover{
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
-    // filter: grayscale(100%);
 }
 
 .port1{
-    
     background-image: url('../assets/Life16FH-HotWheelsDog.jpg');
 }
 .port2{
@@ -351,7 +349,6 @@ input,
 .menuBox{
     position: absolute;
     z-index: 10;
-    // cursor: grab;
 }
 input,
 .menuBox{     
@@ -398,12 +395,12 @@ input{
 }
 
 // ANIMATIONS, ROTATING Hamburger, create X
-.animatedNav::after{
-    transform: rotate(-270deg) translate(-14px); 
-    transition: all .5s ease-in-out;
-}
 .animatedNav{
     transform: rotate(-225deg); 
+    transition: all .5s ease-in-out;
+}
+.animatedNav::after{
+    transform: rotate(-270deg) translate(-14px); 
     transition: all .5s ease-in-out;
 }
 .animatedNav::before{
@@ -445,37 +442,81 @@ input{
     visibility: visible;
 }
 
-.info{
+section{
     display: grid;
+    // max-width: 1440px;
+    padding: 5%;
 }
+
+.infoContainer{
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    column-gap: 4vw;
+    justify-content: space-around;
+    justify-items: left;
+    align-items: start;
+    // overflow: hidden;
+    line-height: 1.5;
+    letter-spacing: .1rem;
+}
+
+.info{
+    height: fit-content;
+    padding-bottom: 7vh;
+    h3{
+        padding-bottom: 1vh;
+    }
+    a{
+        display: block;
+    }
+}
+
+.aboutInfo{
+    max-width: 525px;
+    p{
+        padding-bottom: 1.8rem;
+    }
+}
+
+.clientInfo{
+    p{
+        padding-bottom: 1rem;
+    }
+    ul{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        // height: fit-content;
+        li{
+            width: 185px;
+        }
+    }    
+}
+
+
+
+
+
+
+
+
+
+
 
 
 // MEDIA QUERIES
 @media(max-width: 540px){
-    // Portfolio Selection Page
-    // .portfolio{
-    //     width: 50%;
-    //     height: 45vh;
-    // }
     .portfolio{
         width: 100%;
         height: calc ( 90vh/4 );
     }
-    // .portfolio:not(:hover){
-    //     background-color:#dedede;
-    // }
 
     nav li:hover{
-        // font-size: calc(1.8rem + .4vw);
-        // letter-spacing: .1rem;
-        // font-weight: 600;
+
         filter: grayscale(0);
         .categoryOverlay{
             background-color: rgba(0, 0, 0, 0.139);
         } 
-}
-    // end --------------------
-
-
+    }
 }
 
