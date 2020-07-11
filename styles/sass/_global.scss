@@ -27,8 +27,8 @@ body{
 
 .wrapper{
     margin: 0 5%;
-    max-width: 1440px;
-    width: 90%;
+    width: 1440px;
+    max-width: 90%;
 }
 
 li{
@@ -446,75 +446,72 @@ input{
 
 section{
     display: grid;
-    // max-width: 1440px;
-    padding: 5%;
+    padding: 6vh 0;
+    align-content: center;
 }
 
 .infoContainer{
+    max-width: 84%;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-    column-gap: 4vw;
-    justify-content: space-around;
-    justify-items: left;
+    grid-template-columns: repeat(auto-fit, minmax(540px, 1fr));
+    column-gap: 6vw;
+    justify-content: space-evenly;
+    justify-items: center;
     align-items: start;
-    // overflow: hidden;
     line-height: 1.5;
     letter-spacing: .1rem;
 }
 
 .info{
     height: fit-content;
-    padding-bottom: 7vh;
+    max-width: 65ch;
+    padding-bottom: 4vh;
     h3{
-        padding-bottom: 1vh;
+        padding-bottom: .8vh;
     }
     a{
         display: block;
     }
-}
-
-.aboutInfo{
-    max-width: 525px;
     p{
         padding-bottom: 1.8rem;
     }
 }
+.contactInfo p{
+    padding-bottom: 0rem;
+}
 
 .clientInfo{
-    p{
-        padding-bottom: 1rem;
-    }
+    width: 100%;
     ul{
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        // height: fit-content;
-        li{
-            width: 185px;
-        }
+        grid-template-columns: repeat(auto-fill, 165px);
+        column-gap: 1vw;
     }    
 }
 
 
 
-
-
-
-
-
-
-
-
-
 // MEDIA QUERIES
+@media(max-width:655px){
+    .infoContainer{
+        grid-template-columns: 1fr;
+    }
+    .info{
+        max-width: 100%;
+    } 
+    .clientInfo{
+        width: 100%;
+    }   
+}
+
+
 @media(max-width: 540px){
     .portfolio{
         width: 100%;
         height: calc ( 90vh/4 );
     }
-
     nav li:hover{
-
         filter: grayscale(0);
         .categoryOverlay{
             background-color: rgba(0, 0, 0, 0.139);

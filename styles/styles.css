@@ -271,8 +271,8 @@ body {
 
 .wrapper {
   margin: 0 5%;
-  max-width: 1440px;
-  width: 90%;
+  width: 1440px;
+  max-width: 90%;
 }
 
 li {
@@ -763,20 +763,24 @@ input {
 section {
   display: -ms-grid;
   display: grid;
-  padding: 5%;
+  padding: 6vh 0;
+  -ms-flex-line-pack: center;
+      align-content: center;
 }
 
 .infoContainer {
+  max-width: 84%;
   margin: 0 auto;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(500px, 1fr))[auto-fill];
-      grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-  -webkit-column-gap: 4vw;
-          column-gap: 4vw;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  justify-items: left;
+  -ms-grid-columns: (minmax(540px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(540px, 1fr));
+  -webkit-column-gap: 6vw;
+          column-gap: 6vw;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  justify-items: center;
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: start;
@@ -788,38 +792,50 @@ section {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  padding-bottom: 7vh;
+  max-width: 65ch;
+  padding-bottom: 4vh;
 }
 
 .info h3 {
-  padding-bottom: 1vh;
+  padding-bottom: .8vh;
 }
 
 .info a {
   display: block;
 }
 
-.aboutInfo {
-  max-width: 525px;
-}
-
-.aboutInfo p {
+.info p {
   padding-bottom: 1.8rem;
 }
 
-.clientInfo p {
-  padding-bottom: 1rem;
+.contactInfo p {
+  padding-bottom: 0rem;
+}
+
+.clientInfo {
+  width: 100%;
 }
 
 .clientInfo ul {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr)[3];
-      grid-template-columns: repeat(3, 1fr);
+  -ms-grid-columns: (165px)[auto-fill];
+      grid-template-columns: repeat(auto-fill, 165px);
+  -webkit-column-gap: 1vw;
+          column-gap: 1vw;
 }
 
-.clientInfo ul li {
-  width: 185px;
+@media (max-width: 655px) {
+  .infoContainer {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
+  .info {
+    max-width: 100%;
+  }
+  .clientInfo {
+    width: 100%;
+  }
 }
 
 @media (max-width: 540px) {
