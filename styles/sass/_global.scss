@@ -1,7 +1,7 @@
 html {
     font-size: 62.5%;
     line-height:1.5;
-    min-height: stretch;
+    // min-height: stretch;
     height: 100%;
     width: 100%;
     scroll-behavior: smooth;
@@ -18,7 +18,7 @@ body{
     font-family: $primaryFont;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    height: stretch;
+    // height: stretch;
     min-height: stretch; 
     min-height: 100vh; //full height backgrounds
     //fix for iphone menubar
