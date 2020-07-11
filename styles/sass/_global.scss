@@ -444,45 +444,43 @@ input{
     visibility: visible;
 }
 
-section{
-    display: grid;
-    padding: 6vh 0;
-    align-content: center;
-}
-
 .infoContainer{
-    max-width: 84%;
-    margin: 0 auto;
     display: grid;
+    margin: 0 auto;
+    padding: 6vh 0;
+    max-width: 88%;
     grid-template-columns: repeat(auto-fit, minmax(540px, 1fr));
     column-gap: 6vw;
     justify-content: space-evenly;
     justify-items: center;
+    align-content: center;
     align-items: start;
     line-height: 1.5;
     letter-spacing: .1rem;
 }
 
 .info{
-    height: fit-content;
     max-width: 65ch;
+    width: 100%;
     padding-bottom: 4vh;
     h3{
         padding-bottom: .8vh;
-    }
-    a{
-        display: block;
     }
     p{
         padding-bottom: 1.8rem;
     }
 }
-.contactInfo p{
-    padding-bottom: 0rem;
+
+.contactInfo{
+    p{
+        padding-bottom: 0rem;
+    }
+    .email{
+        display: block;
+    }
 }
 
 .clientInfo{
-    width: 100%;
     ul{
         display: grid;
         grid-template-columns: repeat(auto-fill, 165px);
@@ -491,20 +489,12 @@ section{
 }
 
 
-
 // MEDIA QUERIES
 @media(max-width:655px){
     .infoContainer{
         grid-template-columns: 1fr;
     }
-    .info{
-        max-width: 100%;
-    } 
-    .clientInfo{
-        width: 100%;
-    }   
 }
-
 
 @media(max-width: 540px){
     .portfolio{

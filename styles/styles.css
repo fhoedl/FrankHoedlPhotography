@@ -760,19 +760,12 @@ input {
   visibility: visible;
 }
 
-section {
-  display: -ms-grid;
-  display: grid;
-  padding: 6vh 0;
-  -ms-flex-line-pack: center;
-      align-content: center;
-}
-
 .infoContainer {
-  max-width: 84%;
-  margin: 0 auto;
   display: -ms-grid;
   display: grid;
+  margin: 0 auto;
+  padding: 6vh 0;
+  max-width: 88%;
   -ms-grid-columns: (minmax(540px, 1fr))[auto-fit];
       grid-template-columns: repeat(auto-fit, minmax(540px, 1fr));
   -webkit-column-gap: 6vw;
@@ -781,6 +774,8 @@ section {
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
   justify-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: start;
@@ -789,19 +784,13 @@ section {
 }
 
 .info {
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
   max-width: 65ch;
+  width: 100%;
   padding-bottom: 4vh;
 }
 
 .info h3 {
   padding-bottom: .8vh;
-}
-
-.info a {
-  display: block;
 }
 
 .info p {
@@ -812,8 +801,8 @@ section {
   padding-bottom: 0rem;
 }
 
-.clientInfo {
-  width: 100%;
+.contactInfo .email {
+  display: block;
 }
 
 .clientInfo ul {
@@ -829,12 +818,6 @@ section {
   .infoContainer {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
-  }
-  .info {
-    max-width: 100%;
-  }
-  .clientInfo {
-    width: 100%;
   }
 }
 
