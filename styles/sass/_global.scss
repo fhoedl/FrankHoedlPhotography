@@ -255,19 +255,12 @@ nav li:hover{
 .previousSlide{
     position:absolute;
     opacity: 0;
-    // height: 100vh;
-    // width: 100%;
-    // left: 0;
-    // right: 0;
-    // top:0;
-    // bottom: 0;
 }
 
 .slideFromRight{
     animation-delay: 100ms;
     animation: slidesRight 250ms ease-in-out ;
 }
-
 @keyframes slidesRight{
     0%{
         right: -100%;
@@ -489,7 +482,42 @@ input{
 }
 
 
+
+
+
 // MEDIA QUERIES
+@media screen and (orientation:portrait){
+    .slide,
+    .backSlide,
+    .nextSlide,
+    .previousSlide {
+        background-color: black;
+        background-size: contain;
+    }
+}
+
+@media screen and (orientation:landscape) and (max-width: 1080) {
+    .slide,
+    .backSlide,
+    .nextSlide,
+    .previousSlide {
+        background-color: black;
+        background-size: contain;
+    }
+}
+
+@media screen and (orientation:landscape) and (max-height: 400px)and (min-width: 670px){
+    .slide,
+    .backSlide,
+    .nextSlide,
+    .previousSlide {
+        background-color: black;
+        background-size: contain;
+        // width: 80%;
+    }
+}
+
+
 @media(max-width:655px){
     .infoContainer{
         grid-template-columns: 1fr;

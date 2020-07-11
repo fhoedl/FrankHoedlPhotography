@@ -814,6 +814,36 @@ input {
           column-gap: 1vw;
 }
 
+@media screen and (orientation: portrait) {
+  .slide,
+  .backSlide,
+  .nextSlide,
+  .previousSlide {
+    background-color: black;
+    background-size: contain;
+  }
+}
+
+@media screen and (orientation: landscape) and (max-width: 1080) {
+  .slide,
+  .backSlide,
+  .nextSlide,
+  .previousSlide {
+    background-color: black;
+    background-size: contain;
+  }
+}
+
+@media screen and (orientation: landscape) and (max-height: 400px) and (min-width: 670px) {
+  .slide,
+  .backSlide,
+  .nextSlide,
+  .previousSlide {
+    background-color: black;
+    background-size: contain;
+  }
+}
+
 @media (max-width: 655px) {
   .infoContainer {
     -ms-grid-columns: 1fr;
