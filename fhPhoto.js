@@ -592,12 +592,32 @@ goToGallery.addEventListener('click', function(e){
 // GALLERY NAVIGATION
 // Using Keyboard ARROWS
 document.addEventListener('keydown', (e) => {
-    e.code === `ArrowLeft`
-		? fhPhotoApp.back()
-		: e.code === `ArrowRight`
-		? fhPhotoApp.forward()
-		: null;
+    // e.code === `ArrowLeft`
+	// 	? fhPhotoApp.back()
+	// 	: e.code === `ArrowRight`
+	// 	? fhPhotoApp.forward()
+	// 	: null;
+	if(e.code === `ArrowLeft`) {
+		fhPhotoApp.back()
+		arrowRight.classList.add('arrowFade');
+		arrowLeft.classList.remove('arrowFade')
+		let fadeLeftArrow = () => {
+			arrowLeft.classList.add("arrowFade");
+		};
+		setTimeout(fadeLeftArrow, 500);		
+	}else if (e.code === `ArrowRight`){
+		fhPhotoApp.forward()
+		arrowLeft.classList.add('arrowFade');
+		arrowRight.classList.remove('arrowFade')
+		let fadeRightArrow = () => {
+			arrowRight.classList.add("arrowFade");
+		};
+		setTimeout(fadeRightArrow, 500);
+	} else{
+		null;
+	}
 })
+
 
 // Using ARROW ICONS
 //(DESKTOP Only) Using LEFT & RIGHT Half of Image 
@@ -607,10 +627,27 @@ fhPhotoApp.ifNotMobile = function (){
 			let xPosition = e.clientX;
 			if (e.target.classList.contains("slideContent") === true 
 				|| e.target.classList.contains("arrow")=== true) {
-				xPosition <= width / 2
-					? fhPhotoApp.back()
-					: fhPhotoApp.forward();
-
+				// xPosition <= width / 2
+				// 	? fhPhotoApp.back()
+				// 	: fhPhotoApp.forward();
+				if(xPosition <= width / 2) {
+					fhPhotoApp.back()
+					arrowRight.classList.add('arrowFade');
+					arrowLeft.classList.remove('arrowFade');
+					let fadeLeftArrow = () => {
+						arrowLeft.classList.add('arrowFade');
+					}
+					setTimeout(fadeLeftArrow, 500);		
+				}else{
+					fhPhotoApp.forward();
+					arrowLeft.classList.add('arrowFade');
+					arrowRight.classList.remove('arrowFade');
+					let fadeRightArrow = () => {
+						arrowRight.classList.add('arrowFade');
+					}
+					setTimeout(fadeRightArrow, 500);
+				}
+					
 				arrowRight.addEventListener = ('click',() => {
 					fhPhotoApp.forward();  
 					window.removeEventListener(`mousedown`, addEventListener);
@@ -619,16 +656,22 @@ fhPhotoApp.ifNotMobile = function (){
 				arrowLeft.addEventListener = ('click', () => {
 					fhPhotoApp.back();
 					window.removeEventListener(`mousedown`, addEventListener);
-				});		
+				});	
+				
+				
 			} else {
 				null;
 			}
 		});
+		// slider.addEventListener("mousemove", (e) => {
+		// 	let xPosition = e.clientX;
+		// 	console.log(xPosition);
+		// })
 	} 
 	// Behaviour on mobile...
 	else {		
 		arrowRight.addEventListener('click',() => {
-			fhPhotoApp.forward(); 
+			fhPhotoApp.forward();
 		});
 		arrowLeft.addEventListener('click', () => {
 			fhPhotoApp.back();
@@ -642,8 +685,11 @@ isChecked.addEventListener('click', function () {
 	if(isChecked.checked === true){
 		menuOverlay.classList.add('toggle');
 		hamburger.classList.add('animatedNav');
+
 	}else{
 		fhPhotoApp.removeOverlay();
+		arrowRight.classList.remove("arrowFade");
+		arrowLeft.classList.remove("arrowFade");
 	}
 });
 
@@ -651,6 +697,8 @@ isChecked.addEventListener('click', function () {
 menuOverlay.addEventListener('click', () => {
 	fhPhotoApp.removeOverlay();
 });
+
+
 
 
 // FUNCTIONS
@@ -687,7 +735,7 @@ fhPhotoApp.setCategory = function () {
 //Assign background slide to enable slide effect
 fhPhotoApp.backgroundSlide = function(){
 	sliderBackImage.style.cssText =
-		`background-image : ${slidesByCategory[current].src}; `;
+		`background-image : ${slidesByCategory[current].src}; ` 
 };
 
 // Forward, Right Arrow
@@ -708,7 +756,7 @@ fhPhotoApp.back = () => {
 	fhPhotoApp.backgroundSlide();	
 	// Handling back on 1st slide ->resetting to last last side
     (current === 0) ? current = slidesByCategory.length : current;
-    fhPhotoApp.slideLeft(); 
+	fhPhotoApp.slideLeft(); 
 };
 fhPhotoApp.slideLeft = () => {
 	current--;
@@ -723,6 +771,7 @@ fhPhotoApp.displayImage = function () {
 	sliderImages.style.cssText =
 		`background-image : ${slidesByCategory[current].src}; `;
 	sliderImages.setAttribute(`alt`, slidesByCategory[current].alt)
+
 	// clear animation, (reset on next/previous)
 	let clearAdded = () => {
 		sliderImages.classList.remove("slideFromRight");
@@ -760,6 +809,8 @@ fhPhotoApp.init = () =>{
 	fhPhotoApp.slideLeft();
 }
 
+
+
 // Document Ready
 let ready = (callback) => {
     if (document.readyState != "loading") callback();
@@ -768,4 +819,6 @@ let ready = (callback) => {
 ready(() => {
 	fhPhotoApp.init();
 });
+
+
 
