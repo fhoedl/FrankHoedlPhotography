@@ -466,7 +466,7 @@ fhPhotoApp.goToGallery = document.querySelector(".portfolioContainer");
 	// for logo
 fhPhotoApp.home = document.querySelector('#home');
 	let headerDiv = fhPhotoApp.home;
-	fhPhotoApp.logo = headerDiv.querySelector('.logoClip');
+	fhPhotoApp.logo = headerDiv.querySelector('.logoClip'); 
 	fhPhotoApp.logoLink = headerDiv.querySelector("header a");
 
 	// for slideshow
@@ -603,7 +603,7 @@ document.addEventListener('keydown', (e) => {
 		arrowLeft.classList.remove('arrowFade')
 		let fadeLeftArrow = () => {
 			arrowLeft.classList.add("arrowFade");
-		};
+		}; 
 		setTimeout(fadeLeftArrow, 500);		
 	}else if (e.code === `ArrowRight`){
 		fhPhotoApp.forward()
